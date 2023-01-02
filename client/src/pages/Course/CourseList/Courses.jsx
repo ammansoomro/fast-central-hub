@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {GetCourses, getUniqueCodes, searchOnCourseCode, searchOnCourseName ,getCoursesVotes,getCoursesRating} from './Functions'
+import { GetCourses, getUniqueCodes, searchOnCourseCode, searchOnCourseName, getCoursesVotes, getCoursesRating } from './Functions'
 import { Wrapper, Grid, Card, CardImage, CardHover, CardText, Searchbar, SelectCourseCode, TopMenu } from './Style'
 import { Link } from "react-router-dom";
 const Courses = () => {
@@ -13,43 +13,43 @@ const Courses = () => {
 
   useEffect(() => {
     const pullData = async () => {
-        const res = await GetCourses();
-        setCourses((res));
+      const res = await GetCourses();
+      setCourses((res));
 
-        const res2 = await getUniqueCodes();
-        setUniqueCodes(res2);
+      const res2 = await getUniqueCodes();
+      setUniqueCodes(res2);
 
-        const res3 = await getCoursesVotes();
-        setCourseVotes(res3);
+      const res3 = await getCoursesVotes();
+      setCourseVotes(res3);
 
-        const res4 = await getCoursesRating();
-        setCourseRating(res4);
+      const res4 = await getCoursesRating();
+      setCourseRating(res4);
     };
     pullData();
   }, []);
 
   useEffect(() => {
     const pullData = async () => {
-        if (coursecode === "All") {
-          const res = await GetCourses();
-          setCourses(res);
-          return;
-        }
-        const res = await searchOnCourseCode(coursecode);
+      if (coursecode === "All") {
+        const res = await GetCourses();
         setCourses(res);
+        return;
+      }
+      const res = await searchOnCourseCode(coursecode);
+      setCourses(res);
     };
     pullData();
   }, [coursecode]);
 
   useEffect(() => {
     const pullData = async () => {
-        if (search === "") {
-          const res = await GetCourses();
-          setCourses(res);
-          return;
-        }
-        const res = await searchOnCourseName(search);
+      if (search === "") {
+        const res = await GetCourses();
         setCourses(res);
+        return;
+      }
+      const res = await searchOnCourseName(search);
+      setCourses(res);
     };
     pullData();
   }, [search]);
@@ -84,32 +84,38 @@ const Courses = () => {
       <Grid>
         {courses.map((course) => {
           return (
-            <Card key={course._id}>
-              <CardImage>
-                <img src={course.courseImage} alt={course.coursecode} />
-              </CardImage>
-              <CardHover className="body">
-                <h2>{course.coursecode}</h2>
-                {/* Link to course/:courseId and also pass the current course object, and course id*/}
-                <Link
-                  to={{
-                    pathname: `/course/${course._id}`,
-                    course: course,
-                  }}
-                >
-                  <button className="btn">View Course</button>
-                </Link>
-                <h4>{course.core_elective}</h4>
-              </CardHover>
-              <CardText>
-                <span className="quality"></span>
-                <div className="bottom">
-                  <div className="coursename">
-                    <span>{course.coursecode}</span>
-                    <strong>{course.name}</strong>
-                  </div>
-                  <div className="rating">
-                    {/* {
+            <Link
+              to={{
+                pathname: `/course/${course._id}`,
+                course: course,
+              }}
+            >
+              <Card key={course._id}>
+                <CardImage>
+                  <img src={course.courseImage} alt={course.coursecode} />
+                </CardImage>
+                <CardHover className="body">
+                  <h2>{course.coursecode}</h2>
+                  {/* Link to course/:courseId and also pass the current course object, and course id*/}
+                  <Link
+                    to={{
+                      pathname: `/course/${course._id}`,
+                      course: course,
+                    }}
+                  >
+                    <button className="btn">View Course</button>
+                  </Link>
+                  <h4>{course.core_elective}</h4>
+                </CardHover>
+                <CardText>
+                  <span className="quality"></span>
+                  <div className="bottom">
+                    <div className="coursename">
+                      <span>{course.coursecode}</span>
+                      <strong>{course.name}</strong>
+                    </div>
+                    <div className="rating">
+                      {/* {
                       // eslint-disable-next-line
                       courseVotes.map((courseVote) => {
                         if (courseVote.course_id === course._id) {
@@ -156,27 +162,28 @@ const Courses = () => {
                       })
                     } */}
 
-                    {
-                      // eslint-disable-next-line
-                      courseRating.map((rating) => {
-                        if (rating.course_id === course._id) {
-                          return (
-                            <span key={rating._id}>
-                              {rating.rating}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
-                                alt="Star Logo"
-                            />
-                            </span>
-                          );
+                      {
+                        // eslint-disable-next-line
+                        courseRating.map((rating) => {
+                          if (rating.course_id === course._id) {
+                            return (
+                              <span key={rating._id}>
+                                {rating.rating}
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
+                                  alt="Star Logo"
+                                />
+                              </span>
+                            );
+                          }
                         }
+                        )
                       }
-                      )
-                    }
+                    </div>
                   </div>
-                </div>
-              </CardText>
-            </Card>
+                </CardText>
+              </Card>
+            </Link>
           );
         })}
       </Grid>

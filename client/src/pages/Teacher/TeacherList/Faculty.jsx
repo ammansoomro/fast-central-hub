@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate';
-import {StyledPaginateContainer, CardText, CardHover, CardImage, Card, Grid, Searchbar, SelectDepartment, TopMenu, Wrapper } from './Style'
-import {getTeachers, getTotalFaculty, getFacultyByPage, getTotalFacultyByDepartment, getFacultyByDepartmentAndPage, getFacultyOnSearch, getTeacherVotes } from './Functions'
+import { StyledPaginateContainer, CardText, CardHover, CardImage, Card, Grid, Searchbar, SelectDepartment, TopMenu, Wrapper } from './Style'
+import { getTeachers, getTotalFaculty, getFacultyByPage, getTotalFacultyByDepartment, getFacultyByDepartmentAndPage, getFacultyOnSearch, getTeacherVotes } from './Functions'
 
 const Faculty = () => {
   const [teachers, setTeachers] = useState([]);
@@ -97,73 +97,80 @@ const Faculty = () => {
           // eslint-disable-next-line 
           teachers.map((teacher) => {
             return (
-              <Card key={teacher._id}>
-                <CardImage>
-                  <img src={teacher.picture} alt={teacher.name} />
-                </CardImage>
-                <CardHover className="body">
-                  <h2>{teacher.department}</h2>
-                  <Link to={{
-                    pathname: `/teacher/${teacher._id}`,
-                    teacher: teacher
-                  }}>
-                    <button className="btn">View Teacher</button>
-                  </Link>
-                  <h5>{teacher.email}</h5>
-                </CardHover>
-                <CardText>
-                  <span className="quality"></span>
-                  <div className="bottom">
-                    <div className="teachername">
-                      <span>{teacher.department}</span>
-                      <strong>{teacher.name}</strong>
-                    </div>
-                    <div className="rating">
-                      {
-                        // eslint-disable-next-line 
-                        teacherVotes.map((teacherVote) => {
-                          if (teacherVote.faculty_id === teacher._id) {
-                            //  Show Upvote and Downvote Count if Upvote and Downvote Count is not 0 else show only that is not 0
-                            if (teacherVote.upvote !== 0 && teacherVote.downvote !== 0) {
-                              return (
-                                <>
-                                  {teacherVote.upvote}
-                                  < img
-                                    src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                    alt="upvote Logo"
-                                  />
-                                  {teacherVote.downvote}
-                                  < img src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png" alt="downvote Logo" />
-                                </>
-                              )
-                            }
-                            else if (teacherVote.upvote !== 0) {
-                              return (
-                                <>
-                                  {teacherVote.upvote}
-                                  < img
-                                    src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                    alt="upvote Logo"
-                                  />
-                                </>
-                              )
-                            }
-                            else if (teacherVote.downvote !== 0) {
-                              return (
-                                <>
-                                  {teacherVote.downvote}
-                                  < img src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png" alt="downvote Logo" />
-                                </>
-                              )
+              <Link to={{
+                pathname: `/teacher/${teacher._id}`,
+                teacher: teacher
+              }}
+                key={teacher._id}
+              >
+                <Card key={teacher._id}>
+                  <CardImage>
+                    <img src={teacher.picture} alt={teacher.name} />
+                  </CardImage>
+                  <CardHover className="body">
+                    <h2>{teacher.department}</h2>
+                    <Link to={{
+                      pathname: `/teacher/${teacher._id}`,
+                      teacher: teacher
+                    }}>
+                      <button className="btn">View Teacher</button>
+                    </Link>
+                    <h5>{teacher.email}</h5>
+                  </CardHover>
+                  <CardText>
+                    <span className="quality"></span>
+                    <div className="bottom">
+                      <div className="teachername">
+                        <span>{teacher.department}</span>
+                        <strong>{teacher.name}</strong>
+                      </div>
+                      <div className="rating">
+                        {
+                          // eslint-disable-next-line 
+                          teacherVotes.map((teacherVote) => {
+                            if (teacherVote.faculty_id === teacher._id) {
+                              //  Show Upvote and Downvote Count if Upvote and Downvote Count is not 0 else show only that is not 0
+                              if (teacherVote.upvote !== 0 && teacherVote.downvote !== 0) {
+                                return (
+                                  <>
+                                    {teacherVote.upvote}
+                                    < img
+                                      src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
+                                      alt="upvote Logo"
+                                    />
+                                    {teacherVote.downvote}
+                                    < img src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png" alt="downvote Logo" />
+                                  </>
+                                )
+                              }
+                              else if (teacherVote.upvote !== 0) {
+                                return (
+                                  <>
+                                    {teacherVote.upvote}
+                                    < img
+                                      src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
+                                      alt="upvote Logo"
+                                    />
+                                  </>
+                                )
+                              }
+                              else if (teacherVote.downvote !== 0) {
+                                return (
+                                  <>
+                                    {teacherVote.downvote}
+                                    < img src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png" alt="downvote Logo" />
+                                  </>
+                                )
+                              }
                             }
                           }
+                          )
                         }
-                        )
-                      }
+                      </div>
                     </div>
-                  </div>
-                </CardText>
-              </Card>
+                  </CardText>
+                </Card>
+              </Link>
             );
           })
         }
