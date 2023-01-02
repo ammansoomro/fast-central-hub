@@ -5,21 +5,7 @@ import { useParams } from "react-router-dom";
 import "./Page.css";
 import avatar from "./Avatar.png";
 import swal from "sweetalert";
-
-import {
-    DeleteReview,
-    AlreadyReviewed,
-    Btn,
-    Wrapper,
-    CourseBanner,
-    Image,
-    Card,
-    Container,
-    CardImage,
-    VoteSelect,
-    TabHeading,
-    CourseDetails,
-} from "./Style";
+import { DeleteReview, AlreadyReviewed,Btn,Wrapper, CourseBanner,Image,Card,Container,CardImage,VoteSelect,TabHeading,CourseDetails} from "./Style";
 
 const Course = () => {
     const params = useParams();
