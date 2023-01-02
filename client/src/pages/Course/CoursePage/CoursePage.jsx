@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import "./Page.css";
 import avatar from "./Avatar.png";
 import swal from "sweetalert";
-import Loader from "../../../components/Loader/Loader";
 
 import {
     DeleteReview,
@@ -37,7 +36,6 @@ const Course = () => {
     const [tab, setTab] = useState(2);
     const [rating, setRating] = useState(0);
     const [courseRating, setCourseRating] = useState(0);
-    const [loading, setLoading] = useState(true);
 
 
     // Sort Reviews by time
@@ -123,7 +121,6 @@ const Course = () => {
             const data = await res.json();
             setCourse(data);
             setCourseDescription(data.description);
-            setLoading(false);
         };
 
         const getCourseUpvotes = async (id) => {
@@ -216,12 +213,6 @@ const Course = () => {
         getAlreadyReviewed();
         getCourseRating(params.id);
     }, [params.id, alreadyReviewed, courseReviews]);
-
-
-
-    if (loading) {
-        return <Loader />;
-    }
 
     return (
         <Wrapper>

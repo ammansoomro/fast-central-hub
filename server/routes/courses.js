@@ -72,11 +72,12 @@ router.get('/find/:id', verify, async (req, res) => {
 
 // ==================== GET ALL ====================
 router.get('/', verify, async (req, res) => {
-    const query = req.query.new;
+    // Get All the Courses using async await and return them
     try {
-        const courses = query ? await Course.find().sort({ _id: -1 }).limit(5) : await Course.find();
+        const courses = await Course.find();
         res.status(200).json(courses);
-    } catch (err) {
+    }
+    catch (err) {
         res.status(500).json(err);
     }
 }

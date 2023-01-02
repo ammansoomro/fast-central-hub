@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import Loader from "../../../components/Loader/Loader";
 const Societies = () => {
   const [societies, setSocieties] = useState([])
   const [search, setSearch] = useState("");
@@ -45,10 +44,6 @@ const Societies = () => {
     };
     getSocieties();
   }, [search]);
-
-  if (societies.length === 0) {
-      return <Loader />
-  }
 
   return (
     <Wrapper>

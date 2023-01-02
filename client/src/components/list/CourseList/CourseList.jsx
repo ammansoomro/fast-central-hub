@@ -4,7 +4,6 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
 import styled from 'styled-components'
 import axios from 'axios'
-import Loader from '../../Loader/Loader'
 import { useEffect, useState } from 'react'
 const Swiper = () => {
     const [courses, setCourses] = useState([]);
@@ -24,9 +23,6 @@ const Swiper = () => {
         getCourses();
     }, []);
 
-    if (courses.length === 0) {
-        return <Loader />
-    }
 
     return (
         <>

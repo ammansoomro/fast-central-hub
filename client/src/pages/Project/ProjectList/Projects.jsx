@@ -1,12 +1,12 @@
 import React from 'react'
-import Loader from "../../../components/Loader/Loader";
 
 const Projects = () => {
 
   return (
     <>
-      <Loader />
-
+      <div className="heading">
+        <h1>Projects</h1>
+      </div>
     </>
   )
 }

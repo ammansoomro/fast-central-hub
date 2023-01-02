@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import Loader from "../../../components/Loader/Loader";
 const Departments = () => {
   const [departments, setDepartments] = useState([])
   const [search, setSearch] = useState("");
@@ -45,10 +44,6 @@ const Departments = () => {
     };
     getDepartments();
   }, [search]);
-
-  if (departments.length === 0) {
-      return <Loader />
-  }
 
   return (
     <Wrapper>

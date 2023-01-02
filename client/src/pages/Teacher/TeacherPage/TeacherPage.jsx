@@ -30,9 +30,9 @@ const TeacherPage = () => {
     // Sort Reviews by time
     // eslint-disable-next-line 
 
-    const SortReviews = (a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-    };
+    // const SortReviews = (a, b) => {
+    //     return new Date(b.createdAt) - new Date(a.createdAt);
+    // };
 
     const deleteReview = async (id) => {
         // Swal are you sure you want to delete, After yes then delete

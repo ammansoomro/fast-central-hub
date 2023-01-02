@@ -3,7 +3,6 @@ import axios from "axios";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate';
-import Loader from "../../../components/Loader/Loader";
 
 const Faculty = () => {
   const [teachers, setTeachers] = useState([]);
@@ -168,12 +167,6 @@ const Faculty = () => {
     let selectedPage = e.selected + 1;
     setPageNumber(selectedPage);
   };
-
-  if (teachers.length === 0 || teacherVotes.length === 0
-  ) {
-    return <Loader />;
-  }
-
   return (
     <Wrapper>
       <TopMenu>
