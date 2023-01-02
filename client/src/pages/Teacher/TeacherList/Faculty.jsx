@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate';
 import {StyledPaginateContainer, CardText, CardHover, CardImage, Card, Grid, Searchbar, SelectDepartment, TopMenu, Wrapper } from './Style'
