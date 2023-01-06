@@ -296,44 +296,6 @@ const TeacherPage = () => {
 
                             </div>
                         </div>
-                        <div className="title-bottom">
-                            {/* If CourseIds is Null don't render */}
-                            {
-                                CourseIds.length === 0 ?
-                                    <>
-                                        <strong>No Course Material </strong>
-
-                                    </> :
-                                    <>
-                                        <div className="category">
-                                            <div>
-                                                <strong>Course Material: </strong>
-                                                <ul>
-                                                    {/* {courseDepartments.map((listitem) => {
-                                        return (
-                                            <li key={listitem}>{listitem}</li>
-                                        )
-                                    })} */}
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                {
-                                                    CourseIds.map((courseId) => {
-                                                        return (
-                                                            <>
-                                                                {courses.map((course) => {
-                                                                    return (
-                                                                        <>{course._id === courseId ? <Link to={`/course/${course._id}/teacher/${teacher._id}`}><button class="btn">{course.name}</button></Link> : <></>}</>)
-                                                                })}
-                                                            </>
-                                                        )
-                                                    })}
-                                            </div>
-                                        </div>
-                                    </>
-                            }
-
-                        </div>
                     </div>
                 </Container>
                 <Card>
@@ -346,10 +308,10 @@ const TeacherPage = () => {
                 {/* 2 Button to change Tab from 1 to 2 and 2 to 1 */}
                 <div className="tabButton">
                     <button className="btn" onClick={() => setTab(2)}>
-                        Course Reviews
+                        Teacher Reviews
                     </button>
                     <button className="btn" onClick={() => setTab(1)}>
-                        Course Outline
+                        Courses
                     </button>
                 </div>
 

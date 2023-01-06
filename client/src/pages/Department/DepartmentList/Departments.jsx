@@ -37,7 +37,10 @@ const Departments = () => {
         </Searchbar>
       </TopMenu>
       <Grid
-      >
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, delay: 1 }}>
         {
           departments.map((department) => {
             return (
@@ -48,10 +51,10 @@ const Departments = () => {
                 key={department._id}
               >
                 <Card key={department._id}
-                   initial={{ opacity: 0 }}
-                   animate={{ opacity: 1 }}
-                   exit={{ opacity: 0 }}
-                   transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
                 >
                   <CardImage>
                     <img src={department.picture} alt={department.code} />

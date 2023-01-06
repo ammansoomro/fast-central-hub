@@ -57,7 +57,10 @@ const Societies = () => {
         </Searchbar>
       </TopMenu>
       <Grid
-      >
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, delay: 1 }}>
         {
           societies.map((society) => {
             return (
@@ -102,7 +105,7 @@ const Societies = () => {
 }
 
 
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
