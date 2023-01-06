@@ -1,13 +1,14 @@
-
 .notfound {
     width: 100%;
-    height: 100vh;
     padding: 0;
     margin: 0;
     background: #030e17;
     font-size: 14px;
     line-height: 1;
     overflow: hidden !important;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
 }
 
 .top-header:before {
@@ -67,6 +68,7 @@
     0% {
         transform: translateY(0px);
     }
+
     100% {
         transform: translateY(-2000px);
     }
@@ -306,9 +308,11 @@
     0% {
         transform: rotate(40deg);
     }
+
     50% {
         transform: rotate(-40deg);
     }
+
     100% {
         transform: rotate(40deg);
     }
@@ -381,9 +385,11 @@
     .lamp {
         zoom: .5;
     }
+
     .error__content {
         top: 55%;
     }
+
     .message__title {
         font-size: 3.5rem;
     }
@@ -393,6 +399,7 @@
     .message__title {
         font-size: 34px;
     }
+
     .error__content {
         top: 55%;
     }
@@ -404,6 +411,7 @@
         overflow: hidden;
         max-width: 100vw;
     }
+
     .error__social {
         bottom: 30px;
         top: auto;
@@ -412,30 +420,35 @@
         position: fixed;
         left: 0;
     }
+
     .e-social__icon {
         display: inline-block;
         padding-right: 30px;
     }
+
     .e-social__icon:last-child {
         padding-right: 0;
     }
+
     .e-social__icon {
         padding-bottom: 0;
     }
 }
 
 @media (max-width: 750px) {
+
     body,
-    html
-    {
+    html {
         max-height: 100vh;
     }
+
     .error__content {
         position: static;
         margin: 0 auto;
         transform: none;
         padding-top: 300px;
     }
+
     .error {
         padding-top: 0;
         padding-bottom: 100px;
@@ -448,15 +461,18 @@
         font-size: 36px;
         padding-bottom: 20px;
     }
+
     .message__text {
         font-size: 16px;
         line-height: 2;
         padding-right: 20px;
         padding-left: 20px;
     }
+
     .lamp {
         zoom: .6;
     }
+
     .error__content {
         padding-top: 180px;
     }
@@ -466,11 +482,13 @@
     .message__title {
         font-size: 30px;
     }
+
     .message__text {
         padding-left: 10px;
         padding-right: 10px;
         font-size: 15px;
     }
+
     .error__nav {
         margin-top: 20px;
     }
