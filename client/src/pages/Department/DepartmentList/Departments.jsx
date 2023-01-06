@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getDepartments, getDepartmentsOnSearch } from './Functions'
 import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style'
+
 const Departments = () => {
   const [departments, setDepartments] = useState([])
   const [search, setSearch] = useState("");
@@ -46,8 +47,17 @@ const Departments = () => {
               }}
                 key={department._id}
               >
-                <Card key={department._id}>
-                  <CardImage>
+                <Card key={department._id}
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                >
+                  <CardImage
+                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}>
                     <img src={department.picture} alt={department.code} />
                   </CardImage>
                   <CardHover className="body">

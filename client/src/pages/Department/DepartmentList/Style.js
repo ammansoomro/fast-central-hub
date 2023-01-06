@@ -1,5 +1,6 @@
 
 import styled from "styled-components";
+import { motion } from "framer-motion";
 export const Grid = styled.div`
 margin-top: 50px;
   display: grid;
@@ -13,7 +14,7 @@ margin: 4rem 8rem;
 
 
 // ========== Slider Item Card ==========
-export const Card = styled.div`
+export const Card = styled(motion.div)`
 width: 200px;
 height: 270px;
 position: relative;
@@ -31,7 +32,7 @@ position: relative;
 `;
 
 // ==========  Card Image ==========
-export const CardImage = styled.div`
+export const CardImage = styled(motion.div)`
   border-radius: 1.4rem;
   width: 100%;
   height: 100%;

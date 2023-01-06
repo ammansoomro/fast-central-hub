@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
+import {motion} from 'framer-motion'
 const Societies = () => {
   const [societies, setSocieties] = useState([])
   const [search, setSearch] = useState("");
@@ -59,8 +60,16 @@ const Societies = () => {
         {
           societies.map((society) => {
             return (
-              <Card key={society._id}>
-                <CardImage>
+              <Card key={society._id}
+              animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}>
+                <CardImage
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}>
                   <img src={society.picture} alt={society.code} />
                 </CardImage>
                 <CardHover className="body">
@@ -106,7 +115,7 @@ const Wrapper = styled.div`
 
 
 // ========== Slider Item Card ==========
-const Card = styled.div`
+const Card = styled(motion.div)`
   width: 200px;
   height: 270px;
   position: relative;
@@ -124,7 +133,7 @@ const Card = styled.div`
 `;
 
 // ==========  Card Image ==========
-const CardImage = styled.div`
+const CardImage = styled(motion.div)`
     border-radius: 1.4rem;
     width: 100%;
     height: 100%;

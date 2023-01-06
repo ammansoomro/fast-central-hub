@@ -197,8 +197,4 @@ router.get('/rating', verify, async (req, res) => {
 );
 
 
-
-
-
-
 module.exports = router;
