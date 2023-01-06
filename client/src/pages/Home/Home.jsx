@@ -4,15 +4,22 @@ import "./home.scss"
 import TeacherList from "../../components/list/TeacherList/TeacherList"
 import CourseList from "../../components/list/CourseList/CourseList"
 import Heading from "../../components/heading/Heading"
+import { motion } from "framer-motion";
 const Home = () => {
   return (
-    <div className="home">
+    <motion.div
+    animate={{ opacity: 1 }}
+    initial={{ opacity: 0 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 1 }}
+    className="home"
+  >
       {/* <Navbar/> */}
       <Heading/>
       {/* <Featured/> */}
       <CourseList/>
       <TeacherList/>
-    </div>
+    </motion.div>
   )
 }
 

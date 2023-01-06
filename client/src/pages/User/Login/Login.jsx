@@ -8,7 +8,7 @@ import { useState, useContext } from 'react';
 import { loginCall } from '../../../authContext/apiCalls';
 import { AuthContext } from '../../../authContext/AuthContext';
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
 // IMPORT END ===================================
 const LoginCopy = () => {
   const [username, setUsername] = useState("");
@@ -23,7 +23,11 @@ const LoginCopy = () => {
       <SignIn>
         <h2>Sign In</h2>
         <h3>It's quick & simple</h3>
-        <Form >
+        <Form
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}>
           <Textbox >
             <Input type="text" onChange={(e) => setUsername(e.target.value)} required />
             <label>Username</label>
@@ -46,7 +50,7 @@ const LoginCopy = () => {
           <Btn
             onClick={handleLogin}
           >Login
-          <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined">
               <IoIosArrowForward />
             </span>
           </Btn>
@@ -90,7 +94,7 @@ const Input = styled.input`
   }
 `;
 
-const SignIn = styled.div`
+const SignIn = styled(motion.div)`
   position: fixed;
   z-index: 2;
   height: 100%;
@@ -122,16 +126,15 @@ const SignIn = styled.div`
 
 `;
 
-
-const Form = styled.form`
-  margin: 0;
-  display: grid;
-  gap: 16px;
-  /* If Laptop or desktop screen add padding */
-  @media (min-width: 768px) {
-    padding: 0 390px;
-  }
-  `;
+const Form = styled(motion.form)`
+margin: 0;
+display: grid;
+gap: 16px;
+/* If Laptop or desktop screen add padding */
+@media (min-width: 768px) {
+  padding: 0 390px;
+}
+`;
 
 const Btn = styled.button`
   border: 0;

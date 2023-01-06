@@ -7,6 +7,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import styled from "styled-components";
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import swal from 'sweetalert';
 // IMPORT END ===================================
 const Register = () => {
@@ -102,7 +104,11 @@ const Register = () => {
       <SignUp>
         <h2>Sign Up</h2>
         <h3>It's quick & simple</h3>
-        <Form >
+        <Form
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}>
           <Textbox >
             <Input type="text" name="username" id="username" value={user.username} onChange={handleInputs} required/>
             <label>Username</label>
@@ -241,7 +247,7 @@ const SignUp = styled.div`
 `;
 
 
-const Form = styled.form`
+const Form = styled(motion.form)`
   margin: 0;
   display: grid;
   gap: 16px;

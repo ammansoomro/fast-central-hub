@@ -90,8 +90,17 @@ const Courses = () => {
                 course: course,
               }}
             >
-              <Card key={course._id}>
-                <CardImage>
+              <Card key={course._id}
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+              >
+                <CardImage
+                 animate={{ opacity: 1 }}
+                 initial={{ opacity: 0 }}
+                 exit={{ opacity: 0 }}
+                 transition={{ duration: 1 }}>
                   <img src={course.courseImage} alt={course.coursecode} />
                 </CardImage>
                 <CardHover className="body">
