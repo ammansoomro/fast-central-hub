@@ -104,19 +104,15 @@ const Faculty = () => {
                 key={teacher._id}
               >
                 <Card key={teacher._id}
-                  animate={{ opacity: 1 }}
-                  initial={{ opacity: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 100 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <CardImage
-                    animate={{ opacity: 1 }}
-                    initial={{ opacity: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1}}>
-                    <img 
-                  src={teacher.picture ? teacher.picture : "https://w0.peakpx.com/wallpaper/939/963/HD-wallpaper-technology-error-404-not-found-black-white-minimalist.jpg"}
-                  alt={teacher.name} />
+                  <CardImage>
+                    <img
+                      src={teacher.picture ? teacher.picture : "https://w0.peakpx.com/wallpaper/939/963/HD-wallpaper-technology-error-404-not-found-black-white-minimalist.jpg"}
+                      alt={teacher.name} />
                   </CardImage>
                   <CardHover className="body">
                     <h2>{teacher.department}</h2>

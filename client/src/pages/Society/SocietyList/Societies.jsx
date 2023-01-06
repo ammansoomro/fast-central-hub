@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 const Societies = () => {
   const [societies, setSocieties] = useState([])
   const [search, setSearch] = useState("");
@@ -61,15 +61,12 @@ const Societies = () => {
           societies.map((society) => {
             return (
               <Card key={society._id}
-              animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}>
-                <CardImage
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}>
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+                transition={{ duration: 0.5 }}
+              >
+                <CardImage>
                   <img src={society.picture} alt={society.code} />
                 </CardImage>
                 <CardHover className="body">

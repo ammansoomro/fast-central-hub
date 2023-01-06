@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import "./Page.css";
 import avatar from "./Avatar.png";
+import { motion } from 'framer-motion';
 import swal from "sweetalert";
 
 const TeacherPage = () => {
@@ -27,16 +28,8 @@ const TeacherPage = () => {
     const [alreadyReviewed, setAlreadyReviewd] = useState(false);
     const [tab, setTab] = useState(2);
     const [backgroundpicture, setBackgroundpicture] = useState("");
-    // Sort Reviews by time
-    // eslint-disable-next-line 
-
-    // const SortReviews = (a, b) => {
-    //     return new Date(b.createdAt) - new Date(a.createdAt);
-    // };
 
     const deleteReview = async (id) => {
-        // Swal are you sure you want to delete, After yes then delete
-
         const res = await fetch(`/reviewfaculties/${id}`, {
             method: "DELETE",
             headers: {
@@ -263,7 +256,10 @@ const TeacherPage = () => {
     }, [teacher.department]);
 
     return (
-        <Wrapper>
+        <Wrapper initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ duration: 0.5 }}>
             <TeacherBanner>
                 <Image>
                     {/* If teacher.department is AI then this image else that image */}
@@ -465,7 +461,7 @@ const TeacherPage = () => {
         </Wrapper>
     );
 }
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
 margin: 0rem 1rem;
 `;
 

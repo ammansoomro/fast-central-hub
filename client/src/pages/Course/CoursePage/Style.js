@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {motion} from 'framer-motion'; 
 
 // Styles
 
@@ -67,7 +68,7 @@ export const Btn = styled.input`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   margin: 0rem 1rem;
 `;
 

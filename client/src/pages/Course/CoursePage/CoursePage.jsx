@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import "./Page.css";
 import avatar from "./Avatar.png";
 import swal from "sweetalert";
-import { DeleteReview, AlreadyReviewed,Btn,Wrapper, CourseBanner,Image,Card,Container,CardImage,VoteSelect,TabHeading,CourseDetails} from "./Style";
+import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, VoteSelect, TabHeading, CourseDetails } from "./Style";
 
 const Course = () => {
     const params = useParams();
@@ -201,7 +201,13 @@ const Course = () => {
     }, [params.id, alreadyReviewed, courseReviews]);
 
     return (
-        <Wrapper>
+        <Wrapper
+            // Animate like a slide from below
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ duration: 0.5 }}
+            >
             <CourseBanner>
                 <Image>
                     <img src={course.courseImage} alt={course.courseImage} />
