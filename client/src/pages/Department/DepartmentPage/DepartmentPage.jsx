@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
 const DepartmentPage = () => {
     const params = useParams();
     const [department, setDepartment] = useState({});
@@ -61,7 +63,11 @@ const DepartmentPage = () => {
 
 
     return (
-        <Wrapper>
+        <Wrapper
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ duration: 0.5 }}>
             <DepartmentBanner>
                 <Image>
                     {/* If department.department is AI then this image else that image */}
@@ -147,7 +153,7 @@ const DepartmentPage = () => {
         </Wrapper>
     );
 }
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
 margin: 0rem 1rem;
 `;
 

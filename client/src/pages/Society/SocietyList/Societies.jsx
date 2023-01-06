@@ -46,6 +46,7 @@ const Societies = () => {
     getSocieties();
   }, [search]);
 
+
   return (
     <Wrapper>
       <TopMenu>
@@ -60,36 +61,38 @@ const Societies = () => {
         {
           societies.map((society) => {
             return (
-              <Card key={society._id}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 100 }}
-                transition={{ duration: 0.5 }}
-              >
-                <CardImage>
-                  <img src={society.picture} alt={society.code} />
-                </CardImage>
-                <CardHover className="body">
-                  <h2>{society.code}</h2>
-                  {/* Link to society/:societyId and also pass the current society object, and society id*/}
-                  <Link to={{
-                    pathname: `/society/${society._id}`,
-                    society: society
-                  }}>
+              <Link to={{
+                pathname: `/society/${society._id}`,
+                society: society
+              }}>
+                <Card key={society._id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <CardImage>
+                    <img src={society.picture} alt={society.code} />
+                  </CardImage>
+                  <CardHover className="body">
+                    <h2>{society.code}</h2>
+                    {/* Link to society/:societyId and also pass the current society object, and society id*/}
+
                     <button className="btn">View Society</button>
-                  </Link>
-                  <h4> </h4>
-                </CardHover>
-                <CardText>
-                  <span className="quality"></span>
-                  <div className="bottom">
-                    <div className="societyname">
-                      {/* <span>{society.code}</span> */}
-                      <strong>{society.name}</strong>
+
+                    <h4> </h4>
+                  </CardHover>
+                  <CardText>
+                    <span className="quality"></span>
+                    <div className="bottom">
+                      <div className="societyname">
+                        {/* <span>{society.code}</span> */}
+                        <strong>{society.name}</strong>
+                      </div>
                     </div>
-                  </div>
-                </CardText>
-              </Card>
+                  </CardText>
+                </Card>
+              </Link>
             );
           })
         }

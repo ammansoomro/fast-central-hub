@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 const SocietyPage = () => {
     const params = useParams();
     const [society, setSociety] = useState({});
@@ -45,7 +46,11 @@ const SocietyPage = () => {
 
 
     return (
-        <Wrapper>
+        <Wrapper
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ duration: 0.5 }}>
             <SocietyBanner>
                 <Image>
                     {
@@ -98,7 +103,7 @@ const SocietyPage = () => {
         </Wrapper>
     );
 }
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
 margin: 0rem 1rem;
 `;
 const SocietyBanner = styled.div`

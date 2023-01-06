@@ -66,6 +66,7 @@ const Faculty = () => {
     let selectedPage = e.selected + 1;
     setPageNumber(selectedPage);
   };
+
   return (
     <Wrapper>
       <TopMenu>
@@ -104,9 +105,9 @@ const Faculty = () => {
                 key={teacher._id}
               >
                 <Card key={teacher._id}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 100 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
                 >
                   <CardImage>

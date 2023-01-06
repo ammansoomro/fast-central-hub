@@ -48,10 +48,10 @@ const Departments = () => {
                 key={department._id}
               >
                 <Card key={department._id}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 100 }}
-                  transition={{ duration: 0.5 }}
+                   initial={{ opacity: 0 }}
+                   animate={{ opacity: 1 }}
+                   exit={{ opacity: 0 }}
+                   transition={{ duration: 0.5 }}
                 >
                   <CardImage>
                     <img src={department.picture} alt={department.code} />
