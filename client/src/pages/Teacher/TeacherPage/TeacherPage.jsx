@@ -256,10 +256,12 @@ const TeacherPage = () => {
     }, [teacher.department]);
 
     return (
-        <Wrapper initial={{ opacity: 0, y: 100 }}
+        <Wrapper
+            initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
-            transition={{ duration: 0.5 }}>
+            transition={{ delay: 0.5, duration: 1 }}
+        >
             <TeacherBanner>
                 <Image>
                     {/* If teacher.department is AI then this image else that image */}

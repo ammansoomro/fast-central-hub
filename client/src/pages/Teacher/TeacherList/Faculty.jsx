@@ -93,7 +93,13 @@ const Faculty = () => {
       </TopMenu>
       {/* If Department === All show this */}
 
-      <Grid>
+      <Grid
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, delay: 1 }}
+      >
+
         {
           // eslint-disable-next-line 
           teachers.map((teacher) => {
@@ -105,10 +111,6 @@ const Faculty = () => {
                 key={teacher._id}
               >
                 <Card key={teacher._id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
                 >
                   <CardImage>
                     <img

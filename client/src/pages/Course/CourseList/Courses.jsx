@@ -55,7 +55,8 @@ const Courses = () => {
   }, [search]);
 
   return (
-    <Wrapper>
+    <Wrapper
+    >
       <TopMenu>
         <SelectCourseCode
           className="select"
@@ -81,7 +82,11 @@ const Courses = () => {
           />
         </Searchbar>
       </TopMenu>
-      <Grid>
+      <Grid
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, delay: 1 }}>
         {courses.map((course) => {
           return (
             <Link
@@ -90,12 +95,7 @@ const Courses = () => {
                 course: course,
               }}
             >
-              <Card key={course._id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <Card key={course._id}>
                 <CardImage>
                   <img src={course.courseImage} alt={course.coursecode} />
                 </CardImage>
