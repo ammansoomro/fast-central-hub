@@ -1,6 +1,6 @@
 import "./home.scss"
 // import Navbar from "../../components/navbar/Navbar"
-// import Featured from "../../components/featured/Featured"
+import Featured from "../../components/featured/Featured"
 import TeacherList from "../../components/list/TeacherList/TeacherList"
 import CourseList from "../../components/list/CourseList/CourseList"
 import Heading from "../../components/heading/Heading"
@@ -14,7 +14,9 @@ const Home = () => {
     transition={{ duration: 1 }}
     className="home"
   >
+
       {/* <Navbar/> */}
+      <Featured/>
       <Heading/>
       {/* <Featured/> */}
       <CourseList/>
