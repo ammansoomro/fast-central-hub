@@ -97,4 +97,35 @@ router.get('/search/:name', verify, async (req, res) => {
 }
 );
 
+// Get 1 random society
+router.get('/random', verify, async (req, res) => {
+    // Get Any Random Society Data
+    const type = req.query.type;
+    let society;
+    try {
+        if (type === 'new') {
+            society = await Society.aggregate([
+                { $sample: { size: 1 } },
+            ]);
+        }
+        else if (type === 'old') {
+            society = await Society.aggregate([
+                { $sample: { size: 1 } },
+            ]);
+        }
+        else {
+            society = await Society.aggregate([
+                { $sample: { size: 1 } },
+            ]);
+        }
+        res.status(200).json(society);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
+
+
+
 module.exports = router;
