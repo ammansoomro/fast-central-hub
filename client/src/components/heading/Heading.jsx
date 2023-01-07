@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   margin: 0.5rem 1.5rem;
 `;
 const Content = styled.div`
+    /* Box-shadow on bottom only */
     display: flex;
     align-items: center;
     justify-content: center;
