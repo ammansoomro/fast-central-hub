@@ -6,7 +6,7 @@ import "./Page.css";
 import avatar from "./Avatar.png";
 import swal from "sweetalert";
 import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, VoteSelect, TabHeading, CourseDetails } from "./Style";
-
+import { getTeachers, getCourse, getCourseUpvotes, getCourseDownvotes, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating } from "./Functions";
 const Course = () => {
     const params = useParams();
     const [teachers, setTeachers] = useState([]);
@@ -24,22 +24,16 @@ const Course = () => {
     const [courseRating, setCourseRating] = useState(0);
 
 
-    // Sort Reviews by time
-    const SortReviews = (a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-    };
-
     const deleteReview = async (id) => {
         // Swal are you sure you want to delete, After yes then delete
 
-        const res = await fetch(`/reviewCourses/${id}`, {
+        await fetch(`/reviewCourses/${id}`, {
             method: "DELETE",
             headers: {
                 token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
             },
         });
         // eslint-disable-next-line 
-        const data = await res.json();
         setAlreadyReviewd(false);
         swal({
             title: "Review Deleted",
@@ -52,6 +46,7 @@ const Course = () => {
 
     const submitReview = async (e) => {
         e.preventDefault();
+        // eslint-disable-next-line
         const res = await fetch(`/reviewCourses`, {
             method: "POST",
             headers: {
@@ -70,8 +65,7 @@ const Course = () => {
                 rating: rating,
             }),
         });
-        // eslint-disable-next-line no-unused-vars
-        const data = await res.json();
+
         setReview("");
         swal({
             title: "Review Submitted",
@@ -82,123 +76,40 @@ const Course = () => {
         });
     };
 
-    // Get Course ID from Params
     useEffect(() => {
-        const getTeachers = async () => {
-            const res = await fetch("/facultys", {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setTeachers(data);
-        };
-        // Get Course Details using params and store in course
-        const getCourse = async (id) => {
-            const res = await fetch(`/courses/find/${id}`, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setCourse(data);
-            setCourseDescription(data.description);
+        const pullData = async () => {
+
+            const res = await getTeachers();
+            setTeachers(res);
+
+            const res2 = await getCourse(params.id);
+            setCourse(res2);
+            setCourseDescription(res2.description);
+
+            const res3 = await getCourseUpvotes(params.id);
+            setCourseUpvotes(res3);
+
+            const res4 = await getCourseDownvotes(params.id);
+            setCourseDownvotes(res4);
+
+            const res5 = await getCourseReviews(params.id);
+            setCourseReviews(res5);
+
+            const res6 = await getTeacherIds(params.id);
+            setTeacherIds([...new Set(res6.map((item) => item.teacher_id))]);
+
+            const res7 = await getAlreadyReviewed(params.id);
+            setAlreadyReviewd(res7);
+
+            const res8 = await getCourseRating(params.id);
+            setCourseRating(res8);
+
         };
 
-        const getCourseUpvotes = async (id) => {
-            const res = await fetch(`/reviewCourses/upvote/${id}`, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setCourseUpvotes(data);
-        };
-
-        const getCourseDownvotes = async (id) => {
-            const res = await fetch(`/reviewCourses/downvote/${id}`, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setCourseDownvotes(data);
-        };
-
-        const getCourseReviews = async (id) => {
-            const res = await fetch(`/reviewCourses/find/${id}`, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setCourseReviews(data.sort(SortReviews));
-        };
-        // Get teacher_ids from materials array and store in TeacherIds
-        const getTeacherIds = async () => {
-            const res = await fetch("/materials/bycourse/" + params.id, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setTeacherIds([...new Set(data.map((item) => item.teacher_id))]);
-        };
-
-        const getAlreadyReviewed = async () => {
-            const res = await fetch(`/reviewCourses/find/${params.id}`, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            // Check if user has already reviewed the course
-            if (
-                data.filter(
-                    (item) =>
-                        item.user_id === JSON.parse(localStorage.getItem("user"))._id
-                ).length
-            ) {
-                setAlreadyReviewd(true);
-            }
-        };
-
-        const getCourseRating = async (id) => {
-            const res = await fetch(`/reviewCourses/rating/${id}`, {
-                method: "GET",
-                headers: {
-                    token:
-                        "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                },
-            });
-            const data = await res.json();
-            setCourseRating(data);
-        };
-
-
-        getTeacherIds();
-        getTeachers();
-        getCourse(params.id);
-        getCourseUpvotes(params.id);
-        getCourseDownvotes(params.id);
-        getCourseReviews(params.id);
-        getAlreadyReviewed();
-        getCourseRating(params.id);
+        pullData();
     }, [params.id, alreadyReviewed, courseReviews]);
+
+
 
     return (
         <Wrapper
@@ -207,7 +118,7 @@ const Course = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
             transition={{ duration: 1, delay: 0.5 }}
-            >
+        >
             <CourseBanner>
                 <Image>
                     <img src={course.courseImage} alt={course.courseImage} />
