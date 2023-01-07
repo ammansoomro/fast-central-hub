@@ -74,6 +74,8 @@ const TeacherPage = () => {
     };
 
     useEffect(() => {
+        // Set window to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
         const getTeacher = async () => {
             try {
                 const res = await fetch(`/facultys/find/${params.id}`, {

@@ -6,6 +6,7 @@ const CourseTeacher = () => {
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     const getMaterials = async () => {
       const res = await fetch("/materials/bycourseteacher/" + params.id + "/" + params.teacher_id,
         {

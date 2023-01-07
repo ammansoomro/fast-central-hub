@@ -16,6 +16,7 @@ const SocietyPage = () => {
     ]);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
         const getSociety = async () => {
             try {
                 const res = await fetch(`/societies/find/${params.id}`, {

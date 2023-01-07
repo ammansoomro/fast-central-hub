@@ -21,6 +21,7 @@ const DepartmentPage = () => {
     const [tab, setTab] = useState(2);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
         const pullData = async () => {
             const data = await getDepartment(params.id);
             setDepartment(data);
