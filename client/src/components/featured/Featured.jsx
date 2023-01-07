@@ -35,12 +35,18 @@ const Featured = () => {
           {featured.description}
         </span>
         <div className="buttons">
-          <button className="more">
-            <Link to={`/society/${featured._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to={
+            {
+              pathname: `/society/${featured._id}`,
+              society: featured
+
+            }
+          }>
+            <button className="more">
               <InfoOutlined />
-            </Link>
-            <span>More Info</span>
-          </button>
+              <span>More Info</span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
