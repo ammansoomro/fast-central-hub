@@ -8,7 +8,11 @@ import { useLocation } from "react-router-dom";
 function Navbar() {
   const { dispatch } = useContext(AuthContext);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isSticky, setSticky] = useState(false);
   const location = useLocation();
+
+
+
   useEffect(() => {
     // Get access token from local storage
     if (JSON.parse(localStorage.getItem("user")) === null) {
@@ -18,65 +22,91 @@ function Navbar() {
       setLoggedIn(true)
     }
   }, [location]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 0) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    });
+  }, [ 
+    isSticky
+  ]);
+
   return (
-    <Nav>
-      <div className="Name">
-        <Link to="/">
-          <div className="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/National_University_of_Computer_and_Emerging_Sciences_logo.png" alt="" />
-            <h1>FastCentralHub</h1>
-          </div>
-        </Link>
-      </div>
-      <Search>
-        <Navlist>
-          <Link to="/courses">
-            <li>Courses</li>
+      <Nav
+        className={isSticky ? 'sticky' : ''}
+      >
+        <div className="Name">
+          <Link to="/">
+            <div className="logo">
+              <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/National_University_of_Computer_and_Emerging_Sciences_logo.png" alt="" />
+              <h1>FastCentralHub</h1>
+            </div>
           </Link>
-          <Link to="/faculty">
-            <li>Faculty</li>
-          </Link>
-          <Link to="/departments">
-            <li>Departments</li>
-          </Link>
-          <Link to="/societies">
-            <li>Societies</li>
-          </Link>
-          <Link to="/projects">
-            <li>Projects</li>
-          </Link>
-          {/* If Logged in Show this else dont */}
-          {
-            loggedIn
-            && (
-              <li>
-                <button type="submit" onClick={() => {
-                  dispatch({ type: "LOGOUT" });
-                }}>
-                  Log out
-                </button>
-              </li>
-            )
-          }
-        </Navlist>
-        {/* If location is this don't render */}
-        {/* {
+        </div>
+        <Search>
+          <Navlist>
+            <Link to="/courses">
+              <li>Courses</li>
+            </Link>
+            <Link to="/faculty">
+              <li>Faculty</li>
+            </Link>
+            <Link to="/departments">
+              <li>Departments</li>
+            </Link>
+            <Link to="/societies">
+              <li>Societies</li>
+            </Link>
+            <Link to="/projects">
+              <li>Projects</li>
+            </Link>
+            {/* If Logged in Show this else dont */}
+            {
+              loggedIn
+              && (
+                <li>
+                  <button type="submit" onClick={() => {
+                    dispatch({ type: "LOGOUT" });
+                  }}>
+                    Log out
+                  </button>
+                </li>
+              )
+            }
+          </Navlist>
+          {/* If location is this don't render */}
+          {/* {
           location.pathname !== "/" ? null : <SearchBar />
         } */}
-      </Search>
-    </Nav>
+        </Search>
+      </Nav>
   );
 }
 const Search = styled.div`
   display: flex;
 `;
 const Nav = styled.div`
+z-index:  100;
+top: 0;
   background: #050508;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 1rem 5rem;
+
+  /* Check if sticky */
+  /* &.sticky {
+    position: fixed;
+    background: #050508;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  } */
+
+
   .logo{
     display: flex;
     padding: 0.5rem;
