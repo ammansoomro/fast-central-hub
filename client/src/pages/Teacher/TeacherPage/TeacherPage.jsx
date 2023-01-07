@@ -10,15 +10,8 @@ import swal from "sweetalert";
 
 const TeacherPage = () => {
     const params = useParams();
-    const [courses, setCourses] = useState([
-        {
-            name: "Loading...",
-            email: "Loading...",
-            about: "Loading...",
-        }
-    ]);
+    const [courses, setCourses] = useState([]);
     const [teacher, setTeacher] = useState({});
-    const [CourseIds, setCourseIds] = useState([]);
     const [teacherAbout, setTeacherAbout] = useState("");
     const [teacherUpvotes, setTeacherUpvotes] = useState(0);
     const [teacherDownvotes, setTeacherDownvotes] = useState(0);
@@ -28,6 +21,7 @@ const TeacherPage = () => {
     const [alreadyReviewed, setAlreadyReviewd] = useState(false);
     const [tab, setTab] = useState(2);
     const [backgroundpicture, setBackgroundpicture] = useState("");
+
 
     const deleteReview = async (id) => {
         const res = await fetch(`/reviewfaculties/${id}`, {
@@ -97,7 +91,7 @@ const TeacherPage = () => {
 
         const getCourses = async () => {
             try {
-                const res = await fetch(`/courses`, {
+                const res = await fetch(`/facultys/courses/${params.id}`, {
                     headers: {
                         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
                     }
@@ -107,19 +101,6 @@ const TeacherPage = () => {
             } catch (err) {
                 console.log(err);
             }
-        };
-
-        const getCourseIds = async () => {
-            const res = await fetch("/materials/byteacher/" + params.id,
-                {
-                    headers: {
-                        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                    }
-                });
-            const data = await res.json();
-            // Console Log Only Unique course_id
-            const unique = [...new Set(data.map(item => item.course_id))];
-            setCourseIds(unique);
         };
 
         const getTeacherUpVotes = async () => {
@@ -173,8 +154,6 @@ const TeacherPage = () => {
                 setAlreadyReviewd(true);
             }
         };
-
-        getCourseIds();
         getCourses();
         getTeacher();
         getTeacherUpVotes();
@@ -317,15 +296,57 @@ const TeacherPage = () => {
 
                 {/* Tab 1 */}
                 {tab === 1 ? (
-                    <TabHeading>
-                        {/* <strong>Course Outline</strong> */}
-                    </TabHeading>
+                    <>
+                        <TabHeading>
+                            <strong>Teacher Courses</strong>
+                        </TabHeading>
+                        <Grid
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1 }}>
+                            {
+                                courses.length === 0 ?
+
+                                    <AlreadyReviewed>
+                                        No Courses Available for this Teacher.
+                                    </AlreadyReviewed>
+                                    :
+                                    <>
+                                        <AlreadyReviewed>
+                                            Click on the Course to see the Course Material.
+                                        </AlreadyReviewed>
+                                        <div className="courses">
+                                            {
+                                                courses.map((course) => {
+                                                    return (
+                                                        <Link to={`/course/${course._id}/teacher/${teacher._id}`}
+                                                            key={course.code}>
+                                                            <CourseCard >
+                                                                <CourseCardImage className="teacherImage">
+                                                                    <img src={course.courseImage} alt="Teacher" />
+                                                                </CourseCardImage>
+                                                            </CourseCard>
+                                                        </Link>
+                                                    )
+                                                }
+                                                )
+                                            }
+                                        </div>
+                                    </>
+                            }
+                        </Grid>
+                    </>
                 ) : (
                     <>
                         <TabHeading>
                             <strong>Teacher Reviews</strong>
                         </TabHeading>
-                        <div class="middle-panel">
+                        <motion.div class="middle-panel"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1 }}>
                             {/* If Already Reviewed don't show this */}
                             {!alreadyReviewed ? ( // If not already reviewed
                                 <div class="post create CreatePost">
@@ -418,13 +439,82 @@ const TeacherPage = () => {
                                     </>
                                 );
                             })}
-                        </div>
+                        </motion.div>
                     </>
                 )}
             </TeacherDetails>
         </Wrapper>
     );
 }
+
+const Grid = styled(motion.div)`
+    padding: 1.5rem 0rem;
+    .courses {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 4.5rem 1rem;
+    }
+    .nocourses {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #000;
+        }
+    }
+`;
+
+
+const CourseCard = styled.div`
+  width: 120px;
+  height: 150px;
+  background: linear-gradient(
+360deg,
+#161616b9 35%,
+rgba(73, 73, 73, 0.23) 64%
+);
+  /* position: relative; */
+  transition: all ease 0.3s;
+    /* border: 1px solid rgb(255, 255, 255); */
+  border-radius: 1.4rem !important;
+    /* Reduct Brightness */
+    filter: brightness(0.9);
+    &:hover {
+        border: 1px solid #3582c6;
+    }
+
+    &:hover .body {
+        opacity: 1;
+    }
+`;
+
+const CourseCardImage = styled.div`
+    border-radius: 1.4rem;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+360deg,
+#161616b9 35%,
+rgba(73, 73, 73, 0.23) 64%
+);
+    img {
+        border-radius: 1.4rem;
+        filter: brightness(0.9);
+
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        object-position: center;
+    }
+`;
+
+
 const Wrapper = styled(motion.div)`
 margin: 0rem 1rem;
 `;

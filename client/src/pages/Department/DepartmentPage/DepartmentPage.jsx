@@ -184,11 +184,17 @@ const Grid = styled.div`
 const TeacherCard = styled.div`
   width: 120px;
   height: 150px;
+  background: linear-gradient(
+360deg,
+#161616b9 35%,
+rgba(73, 73, 73, 0.23) 64%
+);
   /* position: relative; */
   transition: all ease 0.3s;
     /* border: 1px solid rgb(255, 255, 255); */
   border-radius: 1.4rem !important;
-
+    /* Reduct Brightness */
+    filter: brightness(0.8);
     &:hover {
         border: 1px solid #3582c6;
     }
@@ -202,9 +208,14 @@ const TeacherCardImage = styled.div`
     border-radius: 1.4rem;
     width: 100%;
     height: 100%;
-
+    background: linear-gradient(
+360deg,
+#161616b9 35%,
+rgba(73, 73, 73, 0.23) 64%
+);
     img {
         border-radius: 1.4rem;
+        filter: brightness(0.8);
 
         width: 100%;
         height: 100%;

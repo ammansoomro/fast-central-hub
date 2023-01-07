@@ -2,7 +2,8 @@ const router = require('express').Router();
 const Faculty = require('../Models/Faculty');
 const verify = require('./verifyToken');
 const Review = require('../Models/ReviewFaculty');
-
+const Material = require('../Models/Material');
+const Course = require('../Models/Course');
 // 1. CREATE
 // 2. UPDATE
 // 3. DELETE
@@ -213,6 +214,21 @@ router.get('/department/:department', verify, async (req, res) => {
     try {
         const faculties = await Faculty.find({ department: req.params.department });
         res.status(200).json(faculties);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
+
+// Get all courses of a faculty, if the given faculty id matches with the faculty id in the material collection
+router.get('/courses/:id', verify, async (req, res) => {
+    try {
+        const courses = await Material.find({ teacher_id: req.params.id });
+        // Get unique course_id from the courses array and then get all courses data from the course collection
+        const course_ids = [...new Set(courses.map(course => course.course_id))];
+        const faculty_Courses = await Course.find({ _id: { $in: course_ids } });
+
+        res.status(200).json(faculty_Courses);
     } catch (err) {
         res.status(500).json(err);
     }
