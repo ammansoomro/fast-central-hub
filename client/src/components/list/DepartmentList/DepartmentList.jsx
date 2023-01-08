@@ -1,27 +1,27 @@
-import CourseItem from '../../cards/CourseCard/CourseCard'
-import './courselist.scss'
+import DepartmentItem from '../../cards/DepartmentCard/DepartmentCard'
+import './departmentlist.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import styled from 'styled-components'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import Slider from "react-slick";
 const Swiper = () => {
-    const [courses, setCourses] = useState([]);
+    const [departments, setDepartments] = useState([]);
     useEffect(() => {
-        const getCourses = async () => {
+        const getDepartments = async () => {
             try {
-                const res = await axios.get("/courses", {
+                const res = await axios.get("/departments", {
                     headers: {
                         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
                     }
                 });
-                setCourses(res.data);
+                setDepartments(res.data);
             } catch (err) {
                 console.log(err);
             }
         };
-        getCourses();
+        getDepartments();
     }, []);
 
     const settings = {
@@ -47,14 +47,16 @@ const Swiper = () => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    initialSlide: 2
+                    initialSlide: 2,
+                    dots: true
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    dots: true
                 }
             }
         ]
@@ -64,22 +66,18 @@ const Swiper = () => {
         <>
             <Wrapper >
                 <div className="SectionHeading">
-                    <h1>University Courses</h1>
+                    <h1>University Departments</h1>
                 </div>
                 <Slider
                     {...settings}
                 >
-                    {/* Map Over Courses */}
-                    {courses.map((course) => (
-                        <CourseItem imageUrl={course.courseImage}
-                            coursecode={course.coursecode}
-                            upvotes={course.upvote}
-                            downvotes={course.downvote}
-                            name={course.name}
-                            id={course._id}
-                            description={course.description}
-                            credithours={course.credithours}
-                            core_elective={course.core_elective}
+                    {/* Map Over Departments */}
+                    {departments.map((department) => (
+                        <DepartmentItem 
+                            name={department.name}
+                            picture = {department.picture}
+                            code = {department.code}
+                            id = {department._id}
                         />
                     ))}
                 </Slider>

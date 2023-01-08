@@ -1,7 +1,8 @@
 import TeacherItem from '../../cards/TeacherCard/TeacherCard'
 import './TeacherList.scss'
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import "@splidejs/splide/dist/css/splide.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -23,63 +24,66 @@ const Swiper = () => {
         getTeachers();
     }, []);
 
+    const settings = {
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "5px",
+        slidesToShow: 5,
+        speed: 500,
+        initialSlide: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
+
     return (
         <>
             <Wrapper >
                 <div className="SectionHeading">
                     <h1>University Faculty</h1>
                 </div>
-                <Splide
-
-                    options={{
-                        type: "loop",
-                        perPage: 5,
-                        perMove: 4,
-                        pagination: false,
-                        arrows: true,
-                        // focus: "center",
-                        gap: "2rem",
-                        breakpoints: {
-                            600: {
-                                perPage: 1,
-                                perMove: 1,
-                                // gap: "1rem",
-                            },
-                            900: {
-                                perPage: 2,
-                                perMove: 2,
-                                gap: "1rem",
-                            },
-                            1200: {
-                                perPage: 3,
-                                perMove: 3,
-                                gap: "1rem",
-                            },
-                            1500: {
-                                perPage: 5,
-                                perMove: 4,
-                                gap: "1rem",
-                            },
-                        }
-                    }}>
+                <Slider
+                    {...settings}
+                >
                     {/* Map Over Teachers */}
                     {teachers.slice(0, 7).map((teacher) => (
-                        <SplideSlide className="SplideCard" key={teacher._id}>
-                            <TeacherItem imageUrl={teacher.picture}
-                                name={teacher.name}
-                                id={teacher._id}
-                                email={teacher.email}
-                                department={teacher.department}
-                                about={teacher.about}
-                                courses={teacher.courses}
-                                reviews={teacher.reviews}
-                                upvotes={teacher.upvote}
-                                downvotes={teacher.downvote}
-                            />
-                        </SplideSlide>
+                        <TeacherItem imageUrl={teacher.picture}
+                            name={teacher.name}
+                            id={teacher._id}
+                            email={teacher.email}
+                            department={teacher.department}
+                            about={teacher.about}
+                            courses={teacher.courses}
+                            reviews={teacher.reviews}
+                            upvotes={teacher.upvote}
+                            downvotes={teacher.downvote}
+                        />
                     ))}
-
-                </Splide>
+                </Slider>
             </Wrapper>
         </>
     )

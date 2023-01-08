@@ -4,6 +4,7 @@ import Featured from "../../components/featured/Featured"
 import TeacherList from "../../components/list/TeacherList/TeacherList"
 import CourseList from "../../components/list/CourseList/CourseList"
 import Heading from "../../components/heading/Heading"
+import DepartmentList from "../../components/list/DepartmentList/DepartmentList"
 import { motion } from "framer-motion";
 const Home = () => {
   return (
@@ -14,13 +15,15 @@ const Home = () => {
       transition={{ duration: 1 }}
       className="home"
     >
-
-      {/* <Navbar/> */}
-      <Featured />
+      {/* If Screen size if small or mobile, don't show Featured */}
+      {
+        window.innerWidth > 480 && <Featured />
+      }
       <Heading />
       {/* <Featured/> */}
       <CourseList />
       <TeacherList />
+      <DepartmentList />
     </motion.div>
   )
 }
