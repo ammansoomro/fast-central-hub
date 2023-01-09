@@ -78,8 +78,6 @@ const Course = () => {
 
     useEffect(() => {
         // Scroll to top with smooth animation
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
         const pullData = async () => {
 
             const res = await getTeachers();

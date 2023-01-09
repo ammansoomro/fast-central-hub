@@ -74,7 +74,14 @@ router.get('/find/:id', verify, async (req, res) => {
 router.get('/', verify, async (req, res) => {
     const query = req.query.new;
     try {
-        const courses = query ? await Course.find().sort({ _id: -1 }).limit(5) : await Course.find();
+        let courses;
+        if (query) {
+            // Get 8 Random
+            courses = await Course.aggregate([{ $sample: { size: 6} }]);
+        } else {
+            courses = await Course.find();
+        }
+
         res.status(200).json(courses);
     } catch (err) {
         res.status(500).json(err);

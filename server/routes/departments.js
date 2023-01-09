@@ -59,7 +59,15 @@ router.get('/find/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     const query = req.query.new;
     try {
-        const departments = query ? await Department.find().sort({ _id: -1 }).limit(5) : await Department.find();
+        let departments;
+        if (query) {
+            // Get 5 Random
+            departments = await Department.aggregate([
+                { $sample: { size: 6 } },
+            ]);
+        } else {
+            departments = await Department.find();
+        }
         res.status(200).json(departments);
     } catch (err) {
         res.status(500).json(err);

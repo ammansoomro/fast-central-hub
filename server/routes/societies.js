@@ -66,7 +66,10 @@ router.get('/', verify, async (req, res) => {
     const query = req.query.new;
     if (query) {
         try {
-            const societies = await Society.find().sort({ _id: -1 }).limit(5);
+            // 5 Ranndom
+            const societies = await Society.aggregate([
+                { $sample: { size: 6 } },
+            ]);
             res.status(200).json(societies);
         }
         catch (err) {

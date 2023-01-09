@@ -11,7 +11,7 @@ const Swiper = () => {
     useEffect(() => {
         const getSocieties = async () => {
             try {
-                const res = await axios.get("/societies", {
+                const res = await axios.get("/societies?new=true", {
                     headers: {
                         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
                     }

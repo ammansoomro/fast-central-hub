@@ -68,6 +68,7 @@ router.delete('/:id', verify, async (req, res) => {
 
 // ==================== GET ====================
 router.get('/find/:id', verify, async (req, res) => {
+    
     try {
         const faculty = await Faculty.findById(req.params.id);
         res.status(200).json(faculty);
@@ -79,8 +80,17 @@ router.get('/find/:id', verify, async (req, res) => {
 
 // ==================== GET ALL ====================
 router.get('/', verify, async (req, res) => {
+    const query = req.query.new;
     try {
-        const faculties = await Faculty.find();
+        let faculties;
+        if (query) {
+            // Get 8 Random 
+            faculties = await Faculty.aggregate([
+                { $sample: { size: 6 } },
+            ]);
+        } else {
+            faculties = await Faculty.find();
+        }
         res.status(200).json(faculties);
     } catch (err) {
         res.status(500).json(err);

@@ -11,7 +11,7 @@ const Swiper = () => {
     useEffect(() => {
         const getTeachers = async () => {
             try {
-                const res = await axios.get("/facultys", {
+                const res = await axios.get("/facultys?new=true", {
                     headers: {
                         token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
                     }
