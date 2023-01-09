@@ -60,11 +60,7 @@ export default function FeaturedInfo() {
           <span className="featuredContent">{ 
             users.length
           }</span>
-          <span className="featuredContentRate">
-            -11 <ArrowDownward  className="featuredIcon negative"/>
-          </span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">Teachers</span>
@@ -72,11 +68,7 @@ export default function FeaturedInfo() {
           <span className="featuredContent">
             {teachers.length}
           </span>
-          <span className="featuredContentRate">
-            -5 <ArrowDownward className="featuredIcon negative"/>
-          </span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">Courses</span>
@@ -84,11 +76,7 @@ export default function FeaturedInfo() {
           <span className="featuredContent">
             {courses.length}
           </span>
-          <span className="featuredContentRate">
-            +2 <ArrowUpward className="featuredIcon"/>
-          </span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
       </div>
     </div>
   );

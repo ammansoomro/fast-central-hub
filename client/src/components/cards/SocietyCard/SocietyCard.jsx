@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./DepartmentCard.scss"
-const listitem = ({ name, code, picture,id }) => {
+import "./SocietyCard.scss"
+const listitem = ({ societycode, imageUrl, name,id }) => {
   return (
     <div className="Wrapper">
       <div className="Card">
-        <div className="DepartmentCardImage">
-          <img src={picture} alt="" />
+        <div className="CardImagee">
+          <img src={imageUrl} alt="" />
         </div>
         <div className="CardHover body">
-          <h1>{code}</h1>
+          <h1>{societycode}</h1>
           <Link to={{
-            pathname: `/department/${id}`,
+            pathname: `/society/${id}`,
           }}>
-            <button className="btn">View Course</button>
+            <button className="btn">View society</button>
           </Link>
           <h3></h3>
         </div>
@@ -21,7 +21,7 @@ const listitem = ({ name, code, picture,id }) => {
           <span className="quality"></span>
           <div className="bottom">
             <div className="moviename">
-              <span>{code}</span>
+              <span>{societycode}</span>
               <strong>{name}</strong>
             </div>
           </div>

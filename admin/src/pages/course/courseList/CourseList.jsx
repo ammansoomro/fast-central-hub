@@ -59,8 +59,8 @@ export default function ProductList() {
       },
     },
     { field: "core_elective", headerName: "Core/Elective", width: 180 },
-    { field: "upvote", headerName: "Upvotes", width: 150 },
-    { field: "downvote", headerName: "Downvotes", width: 150 },
+    { field: "credithours", headerName: "Credit Hours", width: 190 },
+    { field: "downvote", headerName: "Downvotes", width: 110 },
     {
       field: "action",
       headerName: "Action",
@@ -87,7 +87,7 @@ export default function ProductList() {
         rows={courses}
         disableSelectionOnClick
         columns={columns}
-        pageSize={12}
+        pageSize={10}
         getRowId={(r) => r._id}
         checkboxSelection
       />

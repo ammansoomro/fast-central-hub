@@ -72,12 +72,11 @@ router.get('/find/:id', verify, async (req, res) => {
 
 // ==================== GET ALL ====================
 router.get('/', verify, async (req, res) => {
-    // Get All the Courses using async await and return them
+    const query = req.query.new;
     try {
-        const courses = await Course.find();
+        const courses = query ? await Course.find().sort({ _id: -1 }).limit(5) : await Course.find();
         res.status(200).json(courses);
-    }
-    catch (err) {
+    } catch (err) {
         res.status(500).json(err);
     }
 }
@@ -196,5 +195,16 @@ router.get('/rating', verify, async (req, res) => {
 }
 );
 
+
+// Get All Courses by core_elective (core or elective)
+router.get('/core_elective/:core_elective', verify, async (req, res) => {
+    try {
+        const courses = await Course.find({ core_elective: req.params.core_elective });
+        res.status(200).json(courses);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
 
 module.exports = router;

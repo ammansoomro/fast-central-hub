@@ -10,6 +10,7 @@ const Courses = () => {
   // eslint-disable-next-line
   const [courseVotes, setCourseVotes] = useState([]);
   const [courseRating, setCourseRating] = useState([]);
+  const [type, setType] = useState("Type");
 
   useEffect(() => {
     const pullData = async () => {
@@ -54,6 +55,20 @@ const Courses = () => {
     pullData();
   }, [search]);
 
+  useEffect(() => {
+    const pullData = async () => {
+      if (type === "Type") {
+        const res = await GetCourses();
+        setCourses(res);
+        return;
+      }
+
+      const res = await searchOnCourseName(type);
+      setCourses(res);
+    };
+    pullData();
+  }, [type]);
+
   return (
     <Wrapper
     >
@@ -72,6 +87,15 @@ const Courses = () => {
             );
           })}
         </SelectCourseCode>
+        {/* <SelectCourseCode
+          className="select"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="Type">Type</option>
+          <option value="Core">Core</option>
+          <option value="Elective">Elective</option>
+        </SelectCourseCode> */}
         <Searchbar>
           <input
             className="search__input"

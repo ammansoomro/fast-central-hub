@@ -3,8 +3,9 @@ import "./home.scss"
 import Featured from "../../components/featured/Featured"
 import TeacherList from "../../components/list/TeacherList/TeacherList"
 import CourseList from "../../components/list/CourseList/CourseList"
-import Heading from "../../components/heading/Heading"
 import DepartmentList from "../../components/list/DepartmentList/DepartmentList"
+import SocietyList from "../../components/list/SocietyList/SocietyList"
+import Heading from "../../components/heading/Heading"
 import { motion } from "framer-motion";
 const Home = () => {
   return (
@@ -21,8 +22,9 @@ const Home = () => {
       }
       <Heading />
       {/* <Featured/> */}
-      <CourseList />
       <TeacherList />
+      <CourseList />
+      <SocietyList />
       <DepartmentList />
     </motion.div>
   )
