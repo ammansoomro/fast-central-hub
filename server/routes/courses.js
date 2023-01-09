@@ -92,7 +92,9 @@ router.get('/', verify, async (req, res) => {
 // ==================== SEARCH ====================
 router.get('/search/:name', verify, async (req, res) => {
     try {
-        const courses = await Course.find({ name: { $regex: req.params.name, $options: 'i' } });
+        // Search in name and coursecode
+        const courses = await Course.find({ $or: [{ name: { $regex: req.params.name, $options: 'i' } }, { coursecode: { $regex: req.params.name, $options: 'i' } }] });
+        
         res.status(200).json(courses);
     } catch (err) {
         res.status(500).json(err);
