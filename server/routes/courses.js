@@ -77,7 +77,7 @@ router.get('/', verify, async (req, res) => {
         let courses;
         if (query) {
             // Get 8 Random
-            courses = await Course.aggregate([{ $sample: { size: 6} }]);
+            courses = await Course.aggregate([{ $sample: { size: 6 } }]);
         } else {
             courses = await Course.find();
         }
@@ -94,7 +94,6 @@ router.get('/search/:name', verify, async (req, res) => {
     try {
         // Search in name and coursecode
         const courses = await Course.find({ $or: [{ name: { $regex: req.params.name, $options: 'i' } }, { coursecode: { $regex: req.params.name, $options: 'i' } }] });
-        
         res.status(200).json(courses);
     } catch (err) {
         res.status(500).json(err);
@@ -204,11 +203,51 @@ router.get('/rating', verify, async (req, res) => {
 }
 );
 
-
-// Get All Courses by core_elective (core or elective)
-router.get('/core_elective/:core_elective', verify, async (req, res) => {
+// ==================== COUNT ALL COURSES =================
+router.get('/count', verify, async (req, res) => {
     try {
-        const courses = await Course.find({ core_elective: req.params.core_elective });
+        const count = await Course.countDocuments();
+        res.status(200).json(count);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
+
+// ==================== COUNT BY First 2 Letters of CourseCode =================
+router.get('/count/:code', verify, async (req, res) => {
+    try {
+        const count = await Course.countDocuments({ coursecode: { $regex: req.params.code, $options: 'i' } });
+        res.status(200).json(count);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
+
+
+// ==================== PAGINATION ====================
+router.get('/page/:page', verify, async (req, res) => {
+    try {
+        const page = req.params.page;
+        const limit = 20;
+        const skip = (page - 1) * limit;
+        const courses = await Course.find().skip(skip).limit(limit);
+        res.status(200).json(courses);
+    } catch (err) {
+        res.status(500).json(err);
+    }  
+}
+);
+
+// ==================== PAGINATION BY CODE ====================
+router.get('/page/:page/:code', verify, async (req, res) => {
+    try {
+        const page = req.params.page;
+        const limit = 20;
+        const skip = (page - 1) * limit;
+
+        const courses = await Course.find({ coursecode: { $regex: req.params.code, $options: 'i' } }).skip(skip).limit(limit);
         res.status(200).json(courses);
     } catch (err) {
         res.status(500).json(err);
