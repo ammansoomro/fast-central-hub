@@ -9,13 +9,13 @@ margin-top: 50px;
 
   /* Make Responsive for Larger Screen */
   @media screen and (min-width: 768px) {
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   }
 
   /* For 1920x1080 screen resolution */
-  /* @media screen and (min-width: 1920px) {
+  @media screen and (min-width: 1920px) {
       grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  } */
+  }
 
 `;
 // ========== Setting Margin ==========
@@ -246,4 +246,31 @@ export const SelectCourseCode = styled.select`
   @media screen and (max-width: 768px) {
     margin-right: 0;
   }
+`;
+
+export const StyledPaginateContainer = styled.div`
+.pagination {
+display: flex;
+justify-content: center;
+list-style: none;
+cursor: pointer;
+padding: 1rem 0.2rem;
+}
+.pagination a {
+padding: 10px;
+border-radius: 0.3rem;
+border: 1px solid #3883c5;
+color: #3883c5;
+}
+.pagination__link {
+font-weight: bold;
+}
+.pagination__link--active a {
+color: #fff;
+background: #3883c5;
+}
+.pagination__link--disabled a {
+color: rgb(198, 197, 202);
+border: 1px solid rgb(198, 197, 202);
+}
 `;

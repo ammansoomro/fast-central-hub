@@ -255,4 +255,8 @@ router.get('/page/:page/:code', verify, async (req, res) => {
 }
 );
 
+// Pagination on Search
+
+
+
 module.exports = router;

@@ -14,7 +14,7 @@ export const SortCoursesOnName = (courses) => {
 
 export const GetCourses = async () => {
     try {
-        const res = await axios.get("/courses", {
+        const res = await axios.get("/courses/page/1", {
             headers: {
                 token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
             },
@@ -89,6 +89,58 @@ export const getCoursesVotes = async () => {
 export const getCoursesRating = async () => {
     try {
         const res = await axios.get("/courses/rating", {
+            headers: {
+              token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
+            }
+          });
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getTotalCourses = async () => {
+    try {
+        const res = await axios.get("/courses/count", {
+            headers: {
+              token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
+            }
+          });
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getCoursesByPage = async (page) => {
+    try {
+        const res = await axios.get(`/courses/page/${page}`, {
+            headers: {
+              token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
+            }
+          });
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getTotalCoursesByCode = async (code) => {
+    try {
+        const res = await axios.get(`/courses/count/${code}`, {
+            headers: {
+              token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
+            }
+          });
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getCoursesByPageAndCode = async (page, code) => {
+    try {
+        const res = await axios.get(`/courses/page/${page}/${code}`, {
             headers: {
               token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken
             }

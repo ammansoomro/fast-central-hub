@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { GetCourses, getUniqueCodes, searchOnCourseCode, searchOnCourseName, getCoursesVotes, getCoursesRating } from './Functions'
-import { Wrapper, Grid, Card, CardImage, CardHover, CardText, Searchbar, SelectCourseCode, TopMenu } from './Style'
+import { GetCourses, getUniqueCodes, searchOnCourseCode, searchOnCourseName, getCoursesVotes, getCoursesRating, getTotalCourses, getCoursesByPage, getTotalCoursesByCode, getCoursesByPageAndCode } from './Functions'
+import { Wrapper, Grid, Card, CardImage, CardHover, CardText, Searchbar, SelectCourseCode, TopMenu, StyledPaginateContainer } from './Style'
+import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -10,21 +11,28 @@ const Courses = () => {
   // eslint-disable-next-line
   const [courseVotes, setCourseVotes] = useState([]);
   const [courseRating, setCourseRating] = useState([]);
-  const [type, setType] = useState("Type");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [total_courses, setTotalCourses] = useState(0);
+
+  const handlePageClick = (e) => {
+    let selectedPage = e.selected + 1;
+    setPageNumber(selectedPage);
+  };
+
 
   useEffect(() => {
     const pullData = async () => {
       const res = await GetCourses();
-      setCourses((res));
-
       const res2 = await getUniqueCodes();
-      setUniqueCodes(res2);
-
       const res3 = await getCoursesVotes();
-      setCourseVotes(res3);
-
       const res4 = await getCoursesRating();
+      const res5 = await getTotalCourses();
+      setCourses((res));
+      setUniqueCodes(res2);
+      setCourseVotes(res3);
       setCourseRating(res4);
+      setTotalCourses(res5);
+
     };
     pullData();
   }, []);
@@ -32,42 +40,38 @@ const Courses = () => {
   useEffect(() => {
     const pullData = async () => {
       if (coursecode === "All") {
-        const res = await GetCourses();
+        const res = await getCoursesByPage(pageNumber);
         setCourses(res);
+        const res2 = await getTotalCourses();
+        setTotalCourses(res2);
         return;
       }
-      const res = await searchOnCourseCode(coursecode);
-      setCourses(res);
+      else {
+        const res3 = await getTotalCoursesByCode(coursecode);
+        const res4 = await getCoursesByPageAndCode(pageNumber,coursecode);
+        setTotalCourses(res3);
+        setCourses(res4);
+      }
     };
     pullData();
-  }, [coursecode]);
+  }, [coursecode, pageNumber]);
 
   useEffect(() => {
     const pullData = async () => {
       if (search === "") {
         const res = await GetCourses();
         setCourses(res);
+        const res2 = await getTotalCourses();
+        setTotalCourses(res2);
         return;
       }
-      const res = await searchOnCourseName(search);
-      setCourses(res);
+      else {
+        const res = await searchOnCourseName(search);
+        setCourses(res);
+      }
     };
     pullData();
   }, [search]);
-
-  useEffect(() => {
-    const pullData = async () => {
-      if (type === "Type") {
-        const res = await GetCourses();
-        setCourses(res);
-        return;
-      }
-
-      const res = await searchOnCourseName(type);
-      setCourses(res);
-    };
-    pullData();
-  }, [type]);
 
   return (
     <Wrapper
@@ -76,7 +80,11 @@ const Courses = () => {
         <SelectCourseCode
           className="select"
           value={coursecode}
-          onChange={(e) => setCoursecode(e.target.value)}
+          // Onchange set Code and Page Number to 1
+          onChange={(e) => {
+            setCoursecode(e.target.value);
+            setPageNumber(1);
+          }}
         >
           <option value="All">All</option>
           {uniquecodes.map((code) => {
@@ -87,15 +95,6 @@ const Courses = () => {
             );
           })}
         </SelectCourseCode>
-        {/* <SelectCourseCode
-          className="select"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        >
-          <option value="Type">Type</option>
-          <option value="Core">Core</option>
-          <option value="Elective">Elective</option>
-        </SelectCourseCode> */}
         <Searchbar>
           <input
             className="search__input"
@@ -216,6 +215,28 @@ const Courses = () => {
           );
         })}
       </Grid>
+
+      <StyledPaginateContainer>
+        <ReactPaginate
+          previousLabel={'Prev'}
+          nexLabel={'Next'}
+          onPageChange={handlePageClick}
+          pageCount={total_courses / 20}
+          containerClassName={'pagination'}
+          pageClassName={'pagination'}
+          previousClassName={'pagination'}
+          previousLinkClassName={'pagination__link'}
+          nextLinkClassName={'pagination__link'}
+          nextClassName={'pagination'}
+          breakClassName={'pagination'}
+          breakLinkClassName={'pagination'}
+          disabledClassName={'pagination__link--disabled'}
+          activeClassName={'pagination__link--active'}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={3}
+        />
+      </StyledPaginateContainer>
+
     </Wrapper>
   )
 };

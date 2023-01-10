@@ -67,7 +67,7 @@ const DepartmentPage = () => {
                                     department.about === "" ?
                                         <p>No Description Available for this Department.</p>
                                         :
-                                        <p>{departmentAbout.substring(0, 965)}</p>
+                                        <p>{departmentAbout.substring(0, 2500)}</p>
                                 }
                             </div>
                         </div>

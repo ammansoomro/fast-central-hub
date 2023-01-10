@@ -272,7 +272,7 @@ const TeacherPage = () => {
                                     teacher.about === "" ?
                                         <p>No Description Available for this Teacher.</p>
                                         :
-                                        <p>{teacherAbout.substring(0, 965)}</p>
+                                        <p>{teacherAbout.substring(0, 1800)}</p>
                                 }
 
                             </div>

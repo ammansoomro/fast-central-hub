@@ -1,6 +1,6 @@
 import "./home.scss"
 // import Navbar from "../../components/navbar/Navbar"
-import Featured from "../../components/featured/Featured"
+// import Featured from "../../components/featured/Featured"
 import TeacherList from "../../components/list/TeacherList/TeacherList"
 import CourseList from "../../components/list/CourseList/CourseList"
 import DepartmentList from "../../components/list/DepartmentList/DepartmentList"
@@ -18,7 +18,7 @@ const Home = () => {
     >
       {/* If Screen size if small or mobile, don't show Featured */}
       {
-        window.innerWidth > 480 && <Featured />
+        // window.innerWidth > 480 && <Featured />
       }
       <Heading />
       {/* <Featured/> */}

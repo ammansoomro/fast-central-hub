@@ -9,7 +9,7 @@ gap: 2.9rem;
 
 /* Make Responsive for Larger Screen */
 @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 }
 `;
 // ========== Setting Margin ==========
