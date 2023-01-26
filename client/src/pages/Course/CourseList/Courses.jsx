@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GetCourses, getUniqueCodes, searchOnCourseName, getCoursesVotes, getCoursesRating, getTotalCourses, getCoursesByPage, getTotalCoursesByCode, getCoursesByPageAndCode } from './Functions'
+import { GetCourses, getUniqueCodes, searchOnCourseCode, searchOnCourseName, getCoursesVotes, getCoursesRating, getTotalCourses, getCoursesByPage, getTotalCoursesByCode, getCoursesByPageAndCode } from './Functions'
 import { Wrapper, Grid, Card, CardImage, CardHover, CardText, Searchbar, SelectCourseCode, TopMenu, StyledPaginateContainer } from './Style'
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
@@ -9,7 +9,6 @@ const Courses = () => {
   const [search, setSearch] = useState("");
   const [uniquecodes, setUniqueCodes] = useState([]);
   // eslint-disable-next-line
-  const [courseVotes, setCourseVotes] = useState([]);
   const [courseRating, setCourseRating] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [total_courses, setTotalCourses] = useState(0);
@@ -24,12 +23,10 @@ const Courses = () => {
     const pullData = async () => {
       const res = await GetCourses();
       const res2 = await getUniqueCodes();
-      const res3 = await getCoursesVotes();
       const res4 = await getCoursesRating();
       const res5 = await getTotalCourses();
       setCourses((res));
       setUniqueCodes(res2);
-      setCourseVotes(res3);
       setCourseRating(res4);
       setTotalCourses(res5);
 
@@ -143,53 +140,6 @@ const Courses = () => {
                       <strong>{course.name}</strong>
                     </div>
                     <div className="rating">
-                      {/* {
-                      // eslint-disable-next-line
-                      courseVotes.map((courseVote) => {
-                        if (courseVote.course_id === course._id) {
-                          if (
-                            courseVote.upvote !== 0 &&
-                            courseVote.downvote !== 0
-                          ) {
-                            return (
-                              <>
-                                {courseVote.upvote}
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                  alt="upvote Logo"
-                                />
-                                {courseVote.downvote}
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png"
-                                  alt="downvote Logo"
-                                />
-                              </>
-                            );
-                          } else if (courseVote.upvote !== 0) {
-                            return (
-                              <>
-                                {courseVote.upvote}
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                  alt="upvote Logo"
-                                />
-                              </>
-                            );
-                          } else if (courseVote.downvote !== 0) {
-                            return (
-                              <>
-                                {courseVote.downvote}
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png"
-                                  alt="downvote Logo"
-                                />
-                              </>
-                            );
-                          }
-                        }
-                      })
-                    } */}
-
                       {
                         // eslint-disable-next-line
                         courseRating.map((rating) => {

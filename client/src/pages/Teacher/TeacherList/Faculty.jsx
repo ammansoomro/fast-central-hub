@@ -28,13 +28,6 @@ const Faculty = () => {
 
   useEffect(() => {
     const pullData = async () => {
-      if (search === "") {
-        const res = await getTeachers();
-        const res2 = await getTotalFaculty();
-        setTeachers(res);
-        setTotalFaculty(res2);
-        return;
-      }
       if (department === "All") {
         const res = await getFacultyByPage(pageNumber);
         const res2 = await getTotalFaculty();
@@ -48,7 +41,7 @@ const Faculty = () => {
       setTeachers(res4);
     };
     pullData();
-  }, [department, pageNumber,search]);
+  }, [department, pageNumber]);
 
 
   useEffect(() => {
