@@ -15,7 +15,7 @@ const listitem = ({ societycode, imageUrl, name,id }) => {
           }}>
             <button className="btn">View society</button>
           </Link>
-          <h3></h3>
+          <h3> </h3>
         </div>
         <div className="CardText">
           <span className="quality"></span>

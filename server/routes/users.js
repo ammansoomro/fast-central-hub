@@ -90,6 +90,34 @@ router.get('/stats', verify, async (req, res) => {
 }
 );
 
+// Change Password
+router.put('/changePassword/:id', verify, async (req, res) => {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
+        if (req.body.password) {
+            req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString();
+        }
+        try {
+            const user = await User.findById(req.params.id);
+            if (user) {
+                if (CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC).toString(CryptoJS.enc.Utf8) === req.body.oldPassword) {
+                    user.password = req.body.password;
+                    await user.save();
+                    res.status(200).json('Password has been changed');
+                } else {
+                    res.status(403).json('Wrong password');
+                }
+            } else {
+                res.status(404).json('User not found');
+            }
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    } else {
+        res.status(403).json('You can update only your account');
+    }
+}
+);
+
 
 
 

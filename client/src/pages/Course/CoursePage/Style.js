@@ -157,13 +157,20 @@ export const Container = styled.div`
     line-height: 40px;
     letter-spacing: 1px;
   }
+  .course-title .CourseCode{
+    /* Light White Color */
+    color: #d9d9d9;
+    /* Reduce Opacity */
+    opacity: 0.6;
+  }
   .about {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
     flex-wrap: wrap;
     color: #e9e9e9;
+    width: 35%;
   }
   .rating {
     display: flex;

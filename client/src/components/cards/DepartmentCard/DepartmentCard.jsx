@@ -15,7 +15,7 @@ const listitem = ({ name, code, picture,id }) => {
           }}>
             <button className="btn">View Course</button>
           </Link>
-          <h3></h3>
+          <h3> </h3>
         </div>
         <div className="CardText">
           <span className="quality"></span>

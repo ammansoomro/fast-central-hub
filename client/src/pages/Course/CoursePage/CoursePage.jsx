@@ -1,28 +1,42 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./Page.css";
-import avatar from "./Avatar.png";
+import Rating from '@mui/material/Rating';
 import swal from "sweetalert";
-import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, VoteSelect, TabHeading, CourseDetails } from "./Style";
-import { getTeachers, getCourse, getCourseUpvotes, getCourseDownvotes, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating } from "./Functions";
+import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails } from "./Style";
+import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating } from "./Functions";
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+
+// import StarIcon from '@mui/icons-material/Star';
+const labels = {
+    1: 'Useless',
+    2: 'Hmmmm',
+    3: 'Ezz',
+    4: 'GPA+',
+    5: 'GPA++',
+};
+
+
 const Course = () => {
     const params = useParams();
     const [teachers, setTeachers] = useState([]);
+    const [hover, setHover] = useState(-1);
     const [course, setCourse] = useState({});
     const [TeacherIds, setTeacherIds] = useState([]);
     const [courseDescription, setCourseDescription] = useState("");
-    const [courseUpvotes, setCourseUpvotes] = useState(0);
-    const [courseDownvotes, setCourseDownvotes] = useState(0);
     const [courseReviews, setCourseReviews] = useState([]);
     const [review, setReview] = useState("");
-    const [vote, setVote] = useState("upvote");
+    // const [vote, setVote] = useState("upvote");
     const [alreadyReviewed, setAlreadyReviewd] = useState(false);
     const [tab, setTab] = useState(2);
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(3);
     const [courseRating, setCourseRating] = useState(0);
 
+    function getLabelText(value) {
+        return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+    }
 
     const deleteReview = async (id) => {
         // Swal are you sure you want to delete, After yes then delete
@@ -55,10 +69,8 @@ const Course = () => {
             },
             body: JSON.stringify({
                 review: review,
-                // if vote == "upvote" then upvote = 1 else 0
-                upvote: vote === "upvote" ? 1 : 0,
-                // if vote == "downvote" then downvote = 1 else 0
-                downvote: vote === "downvote" ? 1 : 0,
+                // upvote: vote === "upvote" ? 1 : 0,
+                // downvote: vote === "downvote" ? 1 : 0,
                 course_id: params.id,
                 // Get user._id from localstorage
                 user_id: JSON.parse(localStorage.getItem("user"))._id,
@@ -86,12 +98,6 @@ const Course = () => {
             const res2 = await getCourse(params.id);
             setCourse(res2);
             setCourseDescription(res2.description);
-
-            const res3 = await getCourseUpvotes(params.id);
-            setCourseUpvotes(res3);
-
-            const res4 = await getCourseDownvotes(params.id);
-            setCourseDownvotes(res4);
 
             const res5 = await getCourseReviews(params.id);
             setCourseReviews(res5);
@@ -128,13 +134,17 @@ const Course = () => {
                     <div className="title-container">
                         <div className="title-top">
                             <div className="course-title">
-                                <h1>{course.name}</h1>
+                                <h1>{course.name} <span className="CourseCode">({course.coursecode})</span></h1>
                             </div>
                             <div className="about">
                                 <div className="rating">
-                                    {course.coursecode}
+                                    {/* Round off courseRating to 2 decimal places */}
+                                    {courseRating}/5
+                                    <img
+                                        src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
+                                        alt="Star Logo"
+                                    />
                                 </div>
-
                                 {/* <span>{course.core_elective} Course</span> */}
                             </div>
                             <div className="coursedescription">
@@ -194,29 +204,6 @@ const Course = () => {
                     <CardImage>
                         <img src={course.courseImage} alt="Please Wait, Fetching Data..." />
                     </CardImage>
-                    <div className="about">
-
-                        <div className="rating">
-                            {/* Round off courseRating to 2 decimal places */}
-                            {courseRating}/5
-                            <img
-                                src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
-                                alt="Star Logo"
-                            />
-                        </div>
-                        <div className="votes">
-                            {courseUpvotes}
-                            <img
-                                src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                alt="upvote Logo"
-                            />
-                            {courseDownvotes}
-                            <img
-                                src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png"
-                                alt="downvote Logo"
-                            />
-                        </div>
-                    </div>
                 </Card>
             </CourseBanner>
             <CourseDetails>
@@ -246,7 +233,10 @@ const Course = () => {
                                 <div class="post create CreatePost">
                                     <div class="post-top">
                                         <div class="dp">
-                                            <img src={avatar} alt="" />
+                                            <Avatar>
+                                                {/* First Letter Of Login in user username from local storage cookie */}
+                                                {JSON.parse(localStorage.getItem("user")).username.charAt(0).toUpperCase()}
+                                            </Avatar>
                                         </div>
                                         <input
                                             type="text"
@@ -257,41 +247,44 @@ const Course = () => {
                                         />
                                     </div>
                                     <div class="post-bottom">
-                                        <div class="action ">
-                                            <i class="fa fa-image"></i>
-                                            <span>
-                                                <VoteSelect
-                                                    name="vote"
-                                                    value={vote}
-                                                    onChange={(e) => setVote(e.target.value)}
-                                                >
-                                                    <option value="upvote">Upvote</option>
-                                                    <option value="downvote">Downvote</option>
-                                                </VoteSelect>
-                                            </span>
-                                            <span>
-                                                <VoteSelect
-                                                    name="rating"
+                                        <div class="action">
+                                            {/* <Rating name="rating" defaultValue={1} precision={0.25} onChange={(e) => setRating(e.target.value)} value={rating} /> */}
+                                            <Box
+                                                sx={{
+                                                    width: 200,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                <Rating
+                                                    name="hover-feedback"
                                                     value={rating}
-                                                    onChange={(e) => setRating(e.target.value)}
-                                                >
-                                                    <option value="0">Rating</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </VoteSelect>
-                                            </span>
+                                                    precision={1}
+                                                    getLabelText={getLabelText}
+                                                    onChange={(event, newValue) => {
+                                                        setRating(newValue);
+                                                    }}
+                                                    onChangeActive={(event, newHover) => {
+                                                        setHover(newHover);
+                                                    }}
+                                                // emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                                />
+                                                {rating !== null && (
+                                                    <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : rating]}</Box>
+                                                )}
+                                            </Box>
                                         </div>
                                         <div class="action">
-                                            <i class="fa fa-smile"></i>
                                             <span>
                                                 <Btn
                                                     type="submit"
                                                     value="Post"
                                                     onClick={submitReview}
                                                 />
+                                                {/* <Button variant="outlined"
+                                                    onClick={submitReview}
+                                                >Post</Button> */}
+
                                             </span>
                                         </div>
                                     </div>
@@ -310,18 +303,7 @@ const Course = () => {
                                         <div class="post">
                                             <div class="post-top">
                                                 <div class="dp">
-                                                    {/* If review.upvote = 1 then this picture else that picture */}
-                                                    {review.upvote === 1 ? (
-                                                        <img
-                                                            src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                                            alt="upvote Logo"
-                                                        />
-                                                    ) : (
-                                                        <img
-                                                            src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png"
-                                                            alt="downvote Logo"
-                                                        />
-                                                    )}
+                                                    <Avatar></Avatar>
                                                 </div>
                                                 <div class="post-info">
                                                     <div className="postRating">
@@ -340,15 +322,17 @@ const Course = () => {
 
                                                 </div>
                                                 <i class="fas fa-ellipsis-h">
-                                                    {review.user_id ===
-                                                        JSON.parse(localStorage.getItem("user"))._id ? (
-                                                        <DeleteReview
-                                                            onClick={() => deleteReview(review._id)}
-                                                        ></DeleteReview>
+                                                    {(review.user_id === JSON.parse(localStorage.getItem("user"))._id) ||
+                                                        // Check if the logged in user is admin
+                                                        (JSON.parse(localStorage.getItem("user")).isAdmin === true)
+                                                        ? (
+                                                            <DeleteReview
+                                                                onClick={() => deleteReview(review._id)}
+                                                            ></DeleteReview>
 
-                                                    ) : (
-                                                        <></>
-                                                    )}
+                                                        ) : (
+                                                            <></>
+                                                        )}
                                                 </i>
                                             </div>
                                         </div>

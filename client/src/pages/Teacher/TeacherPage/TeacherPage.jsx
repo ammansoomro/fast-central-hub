@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+
 import "./Page.css";
 import avatar from "./Avatar.png";
 import { motion } from 'framer-motion';
@@ -366,17 +370,10 @@ const TeacherPage = () => {
                                     </div>
                                     <div class="post-bottom">
                                         <div class="action ">
-                                            <i class="fa fa-image"></i>
-                                            <span>
-                                                <VoteSelect
-                                                    name="vote"
-                                                    value={vote}
-                                                    onChange={(e) => setVote(e.target.value)}
-                                                >
-                                                    <option value="upvote">Upvote</option>
-                                                    <option value="downvote">Downvote</option>
-                                                </VoteSelect>
-                                            </span>
+                                            <RadioGroup row name="row-radio-buttons-group" value={vote} onChange={(e) => setVote(e.target.value)}>
+                                                <FormControlLabel value="upvote" control={<Radio />} label="Upvote" />
+                                                <FormControlLabel value="downvote" control={<Radio />} label="Downvote" />
+                                            </RadioGroup>
                                         </div>
                                         <div class="action">
                                             <i class="fa fa-smile"></i>
@@ -428,13 +425,17 @@ const TeacherPage = () => {
                                                 </div>
                                                 <i class="fas fa-ellipsis-h">
                                                     {review.user_id ===
-                                                        JSON.parse(localStorage.getItem("user"))._id ? (
-                                                        <DeleteReview
-                                                            onClick={() => deleteReview(review._id)}
-                                                        ></DeleteReview>
-                                                    ) : (
-                                                        <></>
-                                                    )}
+                                                        JSON.parse(localStorage.getItem("user"))._id
+                                                        ||
+                                                        // Check if the logged in user is admin
+                                                        (JSON.parse(localStorage.getItem("user")).isAdmin === true)
+                                                        ? (
+                                                            <DeleteReview
+                                                                onClick={() => deleteReview(review._id)}
+                                                            ></DeleteReview>
+                                                        ) : (
+                                                            <></>
+                                                        )}
                                                 </i>
                                             </div>
                                         </div>

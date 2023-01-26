@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GetCourses, getUniqueCodes, searchOnCourseCode, searchOnCourseName, getCoursesVotes, getCoursesRating, getTotalCourses, getCoursesByPage, getTotalCoursesByCode, getCoursesByPageAndCode } from './Functions'
+import { GetCourses, getUniqueCodes, searchOnCourseName, getCoursesVotes, getCoursesRating, getTotalCourses, getCoursesByPage, getTotalCoursesByCode, getCoursesByPageAndCode } from './Functions'
 import { Wrapper, Grid, Card, CardImage, CardHover, CardText, Searchbar, SelectCourseCode, TopMenu, StyledPaginateContainer } from './Style'
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
