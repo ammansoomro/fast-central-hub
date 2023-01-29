@@ -33,6 +33,7 @@ const Course = () => {
     const [tab, setTab] = useState(2);
     const [rating, setRating] = useState(3);
     const [courseRating, setCourseRating] = useState(0);
+
     function getLabelText(value) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
     }
@@ -114,6 +115,8 @@ const Course = () => {
 
         pullData();
     }, [params.id, alreadyReviewed, courseReviews]);
+
+
 
     return (
         <Wrapper
@@ -197,18 +200,149 @@ const Course = () => {
                         </div>
                     </div>
                 </Container>
-                {/* If Mobile phone, don't show this */}
-                {!window.innerWidth > 768 ? (
-                    <></>
-                ) : (
-                    <Card>
-                        <CardImage>
-                            <img src={course.courseImage} alt="Please Wait, Fetching Data..." />
-                        </CardImage>
-                    </Card>
-                )
-                }
+                <Card>
+                    <CardImage>
+                        <img src={course.courseImage} alt="Please Wait, Fetching Data..." />
+                    </CardImage>
+                </Card>
             </CourseBanner>
+            <CourseDetails>
+                {/* 2 Button to change Tab from 1 to 2 and 2 to 1 */}
+                <div className="tabButton">
+                    <button className="btn" onClick={() => setTab(2)}>
+                        Course Reviews
+                    </button>
+                    <button className="btn" onClick={() => setTab(1)}>
+                        Course Outline
+                    </button>
+                </div>
+
+                {/* Tab 1 */}
+                {tab === 1 ? (
+                    <TabHeading>
+                        <strong>Course Outline</strong>
+                    </TabHeading>
+                ) : (
+                    <>
+                        <TabHeading>
+                            <strong>Course Reviews</strong>
+                        </TabHeading>
+                        <div class="middle-panel">
+                            {/* If Already Reviewed don't show this */}
+                            {!alreadyReviewed ? ( // If not already reviewed
+                                <div class="post create CreatePost">
+                                    <div class="post-top">
+                                        <div class="dp">
+                                            <Avatar>
+                                                {/* First Letter Of Login in user username from local storage cookie */}
+                                                {JSON.parse(localStorage.getItem("user")).username.charAt(0).toUpperCase()}
+                                            </Avatar>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="review"
+                                            value={review}
+                                            onChange={(e) => setReview(e.target.value)}
+                                            placeholder="Write a review"
+                                        />
+                                    </div>
+                                    <div class="post-bottom">
+                                        <div class="action">
+                                            {/* <Rating name="rating" defaultValue={1} precision={0.25} onChange={(e) => setRating(e.target.value)} value={rating} /> */}
+                                            <Box
+                                                sx={{
+                                                    width: 200,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                <Rating
+                                                    name="hover-feedback"
+                                                    value={rating}
+                                                    precision={1}
+                                                    getLabelText={getLabelText}
+                                                    onChange={(event, newValue) => {
+                                                        setRating(newValue);
+                                                    }}
+                                                    onChangeActive={(event, newHover) => {
+                                                        setHover(newHover);
+                                                    }}
+                                                // emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                                />
+                                                {rating !== null && (
+                                                    <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : rating]}</Box>
+                                                )}
+                                            </Box>
+                                        </div>
+                                        <div class="action">
+                                            <span>
+                                                <Btn
+                                                    type="submit"
+                                                    value="Post"
+                                                    onClick={submitReview}
+                                                />
+                                                {/* <Button variant="outlined"
+                                                    onClick={submitReview}
+                                                >Post</Button> */}
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <AlreadyReviewed>
+                                        You have Reviewed this Course!
+                                    </AlreadyReviewed>
+                                </>
+                            )}
+
+                            {courseReviews.map((review) => {
+                                return (
+                                    <>
+                                        <div class="post">
+                                            <div class="post-top">
+                                                <div class="dp">
+                                                    <Avatar></Avatar>
+                                                </div>
+                                                <div class="post-info">
+                                                    <div className="postRating">
+                                                        <p class="name">{review.rating}</p>
+                                                        <img
+                                                            src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
+                                                            alt="Star Logo"
+                                                        />
+                                                    </div>
+                                                    <span class="time">
+                                                        {new Date(review.createdAt).toDateString()}
+                                                    </span>
+                                                </div>
+                                                <div class="post-content">
+                                                    <p>{review.review}</p>
+
+                                                </div>
+                                                <i class="fas fa-ellipsis-h">
+                                                    {(review.user_id === JSON.parse(localStorage.getItem("user"))._id) ||
+                                                        // Check if the logged in user is admin
+                                                        (JSON.parse(localStorage.getItem("user")).isAdmin === true)
+                                                        ? (
+                                                            <DeleteReview
+                                                                onClick={() => deleteReview(review._id)}
+                                                            ></DeleteReview>
+
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                </i>
+                                            </div>
+                                        </div>
+                                    </>
+                                );
+                            })}
+                        </div>
+                    </>
+                )}
+            </CourseDetails>
         </Wrapper>
     );
 

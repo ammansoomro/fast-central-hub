@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion'; 
 
 // Styles
 
@@ -99,8 +99,6 @@ export const CourseBanner = styled.div`
     padding: 50px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
 `;
@@ -133,7 +131,6 @@ export const Image = styled.div`
       rgba(15, 15, 15, 0.3) 100%
     );
   }
-  
 `;
 
 export const Container = styled.div`
@@ -149,6 +146,10 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .coursedescription p{
+        font-size: 0.8rem;
+    }
+
   }
   .title-container {
     width: 100%;
@@ -166,26 +167,10 @@ export const Container = styled.div`
 }
 .course-title{
     width: 150%;
-    /* width 100% for mobile devices */
-    @media only screen and (max-width: 768px) {
-        width: 110%;
-    }
-
 }
 .coursedescription {
     font-size: 1.1rem;
-    @media only screen and (max-width: 768px) {      
-      font-size: 0.6rem;
-    }
 }
-
-  .coursedescription .description p{
-    @media only screen and (max-width: 768px) {      
-      max-width: fit-content;
-    min-width: fit-content;    }
-
-  }
-
   .course-title h1 {
     color: #ffffff;
     font-weight: 600;
@@ -193,10 +178,6 @@ export const Container = styled.div`
     font-family: 'Signika', sans-serif;
     line-height: 40px;
     letter-spacing: 1px;
-    @media only screen and (max-width: 768px) {
-      font-size: 1.6rem;
-      line-height: 30px;
-    }
   }
   .course-title .CourseCode{
     /* Light White Color */
@@ -218,9 +199,6 @@ export const Container = styled.div`
     align-items: center;
     justify-content: flex;
     letter-spacing: 0.1rem;
-    @media only screen and (max-width: 768px) {
-      font-size: 0.8rem;
-    }
     img {
       height: 1.4rem;
       width: 1.4rem;
@@ -231,12 +209,7 @@ export const Container = styled.div`
       display:flex;
       align-items: center;
       justify-content: center;
-      padding-bottom: 5px;
-      @media only screen and (max-width: 768px) {
-        height: 1.2rem;
-        width: 1.2rem;
-        margin: 1px;
-      }
+      padding-bottom: 5px;;
     }
   }
   .votes{
@@ -402,7 +375,6 @@ export const Card = styled.div`
       padding-bottom: 5px;;
     }
   }
-
   
 `;
 
