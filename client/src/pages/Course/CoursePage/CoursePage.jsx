@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import "./Page.css";
 import Rating from '@mui/material/Rating';
 import swal from "sweetalert";
-import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails } from "./Style";
+import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton } from "./Style";
 import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating } from "./Functions";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 // import StarIcon from '@mui/icons-material/Star';
 const labels = {
@@ -155,46 +157,6 @@ const Course = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="title-bottom">
-                            {TeacherIds.length === 0 ? (
-                                <>
-                                    <strong>No Course Teachers</strong>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="category">
-                                        <div>
-                                            <strong>Teachers: </strong>
-                                        </div>
-                                        <div>
-                                            {TeacherIds.map((id) => {
-                                                return (
-                                                    <>
-                                                        {teachers.map((teacher) => {
-                                                            return (
-                                                                <>
-                                                                    {teacher._id === id ? (
-                                                                        <Link
-                                                                            to={`/course/${course._id}/teacher/${teacher._id}`}
-                                                                        >
-                                                                            <button className="btn">
-                                                                                {teacher.name}
-                                                                            </button>
-                                                                        </Link>
-                                                                    ) : (
-                                                                        <></>
-                                                                    )}
-                                                                </>
-                                                            );
-                                                        })}
-                                                    </>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                        </div>
                     </div>
                 </Container>
                 {/* If Mobile phone, don't show this */}
@@ -209,12 +171,264 @@ const Course = () => {
                 )
                 }
             </CourseBanner>
+            <CourseDetails>
+                {/* 2 Button to change Tab from 1 to 2 and 2 to 1 */}
+                <div className="tabButton">
+                    <TabButton onClick={() => setTab(2)}>
+                        Course Reviews
+                    </TabButton>
+                    {/* <TabButton onClick={() => setTab(1)}>
+                        Course Outline
+                    </TabButton> */}
+                    <TabButton onClick={() => setTab(3)}>
+                        Course Material
+                    </TabButton>
+                </div>
+
+                {/* Tab 1 */}
+                {tab === 1 ? (
+                    <TabHeading>
+                        <strong>Course Outline</strong>
+                    </TabHeading>
+                ) :
+                    // Tab 2
+                    tab === 3 ? (
+                        <>
+                            <TabHeading>
+                                <strong>Course Material</strong>
+                            </TabHeading>
+                            <Grid
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1 }}>
+                            {
+                                TeacherIds.length === 0 ?
+
+                                    <AlreadyReviewed>
+                                        No Courses Available for this Teacher.
+                                    </AlreadyReviewed>
+                                    :
+                                    <>
+                                        <AlreadyReviewed>
+                                            Click on the Course to see the Course Material.
+                                        </AlreadyReviewed>
+                                        <div className="courses">
+                                            {
+                                                teachers.map((teacher) => {
+                                                    return (
+                                                        <Link to={`/course/${course._id}/teacher/${teacher._id}`}
+                                                            key={teacher._id}>
+                                                            <CourseCard >
+                                                                <CourseCardImage className="teacherImage">
+                                                                    <img src={teacher.picture} alt="Teacher" />
+                                                                </CourseCardImage>
+                                                            </CourseCard>
+                                                        </Link>
+                                                    )
+                                                }
+                                                )
+                                            }
+                                        </div>
+                                    </>
+                            }
+                        </Grid>
+                        </>
+
+                    ) :
+                        (
+                            <>
+                                <TabHeading>
+                                    <strong>Course Reviews</strong>
+                                </TabHeading>
+                                <div class="middle-panel">
+                                    {/* If Already Reviewed don't show this */}
+                                    {!alreadyReviewed ? ( // If not already reviewed
+                                        <div class="post create CreatePost">
+                                            <div class="post-top">
+                                                <div class="dp">
+                                                    <Avatar>
+                                                        {/* First Letter Of Login in user username from local storage cookie */}
+                                                        {JSON.parse(localStorage.getItem("user")).username.charAt(0).toUpperCase()}
+                                                    </Avatar>
+                                                </div>
+                                                <input
+                                                    type="text"
+                                                    name="review"
+                                                    value={review}
+                                                    onChange={(e) => setReview(e.target.value)}
+                                                    placeholder="Write a review"
+                                                />
+                                            </div>
+                                            <div class="post-bottom">
+                                                <div class="action">
+                                                    {/* <Rating name="rating" defaultValue={1} precision={0.25} onChange={(e) => setRating(e.target.value)} value={rating} /> */}
+                                                    <Box
+                                                        sx={{
+                                                            width: 200,
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                        }}
+                                                    >
+                                                        <Rating
+                                                            name="hover-feedback"
+                                                            value={rating}
+                                                            precision={1}
+                                                            getLabelText={getLabelText}
+                                                            onChange={(event, newValue) => {
+                                                                setRating(newValue);
+                                                            }}
+                                                            onChangeActive={(event, newHover) => {
+                                                                setHover(newHover);
+                                                            }}
+                                                        // emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                                        />
+                                                        {rating !== null && (
+                                                            <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : rating]}</Box>
+                                                        )}
+                                                    </Box>
+                                                </div>
+                                                <div class="action">
+                                                    <span>
+                                                        <Btn
+                                                            type="submit"
+                                                            value="Post"
+                                                            onClick={submitReview}
+                                                        />
+                                                        {/* <Button variant="outlined"
+                                                    onClick={submitReview}
+                                                >Post</Button> */}
+
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <AlreadyReviewed>
+                                                You have Reviewed this Course!
+                                            </AlreadyReviewed>
+                                        </>
+                                    )}
+
+                                    {courseReviews.map((review) => {
+                                        return (
+                                            <>
+                                                <div class="post">
+                                                    <div class="post-top">
+                                                        <div class="dp">
+                                                            <Avatar></Avatar>
+                                                        </div>
+                                                        <div class="post-info">
+                                                            <div className="postRating">
+                                                                <p class="name">{review.rating}</p>
+                                                                <img
+                                                                    src="https://cdn-icons-png.flaticon.com/512/616/616489.png"
+                                                                    alt="Star Logo"
+                                                                />
+                                                            </div>
+                                                            <span class="time">
+                                                                {new Date(review.createdAt).toDateString()}
+                                                            </span>
+                                                        </div>
+                                                        <div class="post-content">
+                                                            <p>{review.review}</p>
+
+                                                        </div>
+                                                        <i class="fas fa-ellipsis-h">
+                                                            {(review.user_id === JSON.parse(localStorage.getItem("user"))._id) ||
+                                                                // Check if the logged in user is admin
+                                                                (JSON.parse(localStorage.getItem("user")).isAdmin === true)
+                                                                ? (
+                                                                    <DeleteReview
+                                                                        onClick={() => deleteReview(review._id)}
+                                                                    ></DeleteReview>
+
+                                                                ) : (
+                                                                    <></>
+                                                                )}
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        );
+                                    })}
+                                </div>
+                            </>
+                        )}
+            </CourseDetails>
         </Wrapper>
     );
 
 };
 
 
+const Grid = styled(motion.div)`
+    padding: 1.5rem 0rem;
+    .courses {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 4.5rem 1rem;
+    }
+    .nocourses {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #000;
+        }
+    }
+`;
+
+
+const CourseCard = styled.div`
+  width: 120px;
+  height: 150px;
+  background: linear-gradient(
+360deg,
+#161616b9 35%,
+rgba(73, 73, 73, 0.23) 64%
+);
+  /* position: relative; */
+  transition: all ease 0.3s;
+    /* border: 1px solid rgb(255, 255, 255); */
+  border-radius: 1.4rem !important;
+    /* Reduct Brightness */
+    filter: brightness(0.9);
+    &:hover {
+        border: 1px solid #3582c6;
+    }
+
+    &:hover .body {
+        opacity: 1;
+    }
+`;
+
+const CourseCardImage = styled.div`
+    border-radius: 1.4rem;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+360deg,
+#161616b9 35%,
+rgba(73, 73, 73, 0.23) 64%
+);
+    img {
+        border-radius: 1.4rem;
+        filter: brightness(0.9);
+
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        object-position: center;
+    }
+`;
 
 
 export default Course;
