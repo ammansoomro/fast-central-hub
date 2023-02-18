@@ -198,41 +198,41 @@ const Course = () => {
                                 <strong>Course Material</strong>
                             </TabHeading>
                             <Grid
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 1 }}>
-                            {
-                                TeacherIds.length === 0 ?
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1 }}>
+                                {
+                                    TeacherIds.length === 0 ?
 
-                                    <AlreadyReviewed>
-                                        No Courses Available for this Teacher.
-                                    </AlreadyReviewed>
-                                    :
-                                    <>
                                         <AlreadyReviewed>
-                                            Click on the Course to see the Course Material.
+                                            No Courses Available for this Teacher.
                                         </AlreadyReviewed>
-                                        <div className="courses">
-                                            {
-                                                teachers.map((teacher) => {
-                                                    return (
-                                                        <Link to={`/course/${course._id}/teacher/${teacher._id}`}
-                                                            key={teacher._id}>
-                                                            <CourseCard >
-                                                                <CourseCardImage className="teacherImage">
-                                                                    <img src={teacher.picture} alt="Teacher" />
-                                                                </CourseCardImage>
-                                                            </CourseCard>
-                                                        </Link>
+                                        :
+                                        <>
+                                            <AlreadyReviewed>
+                                                Click on the Course to see the Course Material.
+                                            </AlreadyReviewed>
+                                            <div className="courses">
+                                                {
+                                                    teachers.map((teacher) => {
+                                                        return (
+                                                            <Link to={`/course/${course._id}/teacher/${teacher._id}`}
+                                                                key={teacher._id}>
+                                                                <CourseCard >
+                                                                    <CourseCardImage className="teacherImage">
+                                                                        <img src={teacher.picture} alt="Teacher" />
+                                                                    </CourseCardImage>
+                                                                </CourseCard>
+                                                            </Link>
+                                                        )
+                                                    }
                                                     )
                                                 }
-                                                )
-                                            }
-                                        </div>
-                                    </>
-                            }
-                        </Grid>
+                                            </div>
+                                        </>
+                                }
+                            </Grid>
                         </>
 
                     ) :
