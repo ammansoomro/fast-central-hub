@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
-import { Wrapper, DepartmentBanner, Image, Container, Card, CardImage, DepartmentDetails, TabHeading, Grid, TeacherCard, TeacherCardImage } from './Style'
+import { Wrapper, DepartmentBanner, Image, Container, Card, CardImage, DepartmentDetails, TabHeading, Grid, TeacherCard, TeacherCardImage, TabButton} from './Style'
 import { getDepartment,getDepartmentTeachers} from './Functions'
 const DepartmentPage = () => {
     const params = useParams();
@@ -82,12 +82,12 @@ const DepartmentPage = () => {
             <DepartmentDetails>
                 {/* 2 Button to change Tab from 1 to 2 and 2 to 1 */}
                 <div className="tabButton">
-                    <button className="btn" onClick={() => setTab(2)}>
+                    <TabButton onClick={() => setTab(2)}>
                         Department Teachers
-                    </button>
-                    <button className="btn" onClick={() => setTab(1)}>
+                    </TabButton>
+                    <TabButton onClick={() => setTab(1)}>
                         Tentative Study Plan
-                    </button>
+                    </TabButton>
                 </div>
 
                 {/* Tab 1 */}
@@ -130,6 +130,7 @@ const DepartmentPage = () => {
         </Wrapper>
     );
 }
+
 
 
 export default DepartmentPage;

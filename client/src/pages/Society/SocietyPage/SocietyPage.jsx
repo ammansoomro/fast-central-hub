@@ -73,7 +73,7 @@ const SocietyPage = () => {
                                     society.description === "" ?
                                         <p>No Description Available for this Society.</p>
                                         :
-                                        <p>{societyAbout.substring(0, 965)}</p>
+                                        <p>{societyAbout.substring(0, 1850)}</p>
                                 }
                             </div>
                         </div>
@@ -91,7 +91,7 @@ const SocietyPage = () => {
                         return (
                             <div className="eventdetails">
                                 <div className="eventname">
-                                    <h1>{event.name}</h1>
+                                    <h3>{event.name}</h3>
                                 </div>
                                 <div className="eventdescription">
                                     <p>{event.description}</p>
@@ -281,6 +281,10 @@ text-align: center;
 p{
 margin: 1rem 0;
 color: #747474;
+/* Text Align Left */
+text-align: justify;
+font-size: 0.9rem;
+    
 }
 `;
 

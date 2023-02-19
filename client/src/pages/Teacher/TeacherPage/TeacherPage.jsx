@@ -285,26 +285,26 @@ const TeacherPage = () => {
                 </Container>
                 <Card>
                     <CardImage>
-                        <img src={teacher.picture} alt="Please Wait, Fetching Data..." />
+                        <img src={teacher?.picture} alt="Please Wait, Fetching Data..." />
                     </CardImage>
                 </Card>
             </TeacherBanner>
             <TeacherDetails>
                 {/* 2 Button to change Tab from 1 to 2 and 2 to 1 */}
                 <div className="tabButton">
-                    <button className="btn" onClick={() => setTab(2)}>
+                    <TabButton onClick={() => setTab(2)}>
                         Teacher Reviews
-                    </button>
-                    <button className="btn" onClick={() => setTab(1)}>
-                        Courses
-                    </button>
+                    </TabButton>
+                    <TabButton onClick={() => setTab(1)}>
+                        Courses Material
+                    </TabButton>
                 </div>
 
                 {/* Tab 1 */}
                 {tab === 1 ? (
                     <>
                         <TabHeading>
-                            <strong>Teacher Courses</strong>
+                            <strong>Course Material</strong>
                         </TabHeading>
                         <Grid
                             initial={{ opacity: 0 }}
@@ -324,7 +324,7 @@ const TeacherPage = () => {
                                         </AlreadyReviewed>
                                         <div className="courses">
                                             {
-                                                courses.map((course) => {
+                                                courses?.map((course) => {
                                                     return (
                                                         <Link to={`/course/${course._id}/teacher/${teacher._id}`}
                                                             key={course.code}>
@@ -825,6 +825,29 @@ export const Btn = styled.input`
     color: #3883c5;
     background: transparent;
   }
+`;
+
+const TabButton = styled.button`
+    border: none;
+    outline: 2px solid #3883c5;
+    background: transparent;
+    color: #3883c5;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 4px;
+    transition: 0.4s;
+    margin-top: 1rem;
+    margin-right: 0.9rem;
+    border-radius: 0.2rem;
+
+
+    /* Hover */
+    &:hover{
+    transform: translateY(-0.3rem);
+    color: #355C7D;
+    outline: 2px solid #355C7D;
+    }
+
 `;
 
 export default TeacherPage;

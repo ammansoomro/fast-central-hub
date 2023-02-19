@@ -13,7 +13,7 @@ const listitem = ({ societycode, imageUrl, name,id }) => {
           <Link to={{
             pathname: `/society/${id}`,
           }}>
-            <button className="btn">View society</button>
+            <button className="btn">View Society</button>
           </Link>
           <h3> </h3>
         </div>

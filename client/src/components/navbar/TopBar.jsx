@@ -31,59 +31,59 @@ function Navbar() {
         setSticky(false);
       }
     });
-  }, [ 
+  }, [
     isSticky
   ]);
 
   return (
-      <Nav
-        className={isSticky ? 'sticky' : ''}
-      >
-        <div className="Name">
-          <Link to="/">
-            <div className="logo">
-              <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/National_University_of_Computer_and_Emerging_Sciences_logo.png" alt="" />
-              <h1>FastCentralHub</h1>
-            </div>
+    <Nav
+      className={isSticky ? 'sticky' : ''}
+    >
+      <div className="Name">
+        <Link to="/">
+          <div className="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/National_University_of_Computer_and_Emerging_Sciences_logo.png" alt="" />
+            <h1>FastCentralHub</h1>
+          </div>
+        </Link>
+      </div>
+      <Search>
+        <Navlist>
+          <Link to="/courses">
+            <li>Courses</li>
           </Link>
-        </div>
-        <Search>
-          <Navlist>
-            <Link to="/courses">
-              <li>Courses</li>
-            </Link>
-            <Link to="/faculty">
-              <li>Faculty</li>
-            </Link>
-            <Link to="/departments">
-              <li>Departments</li>
-            </Link>
-            <Link to="/societies">
-              <li>Societies</li>
-            </Link>
-            <Link to="/projects">
-              <li>Projects</li>
-            </Link>
-            {/* If Logged in Show this else dont */}
-            {
-              loggedIn
-              && (
-                <li>
-                  <button type="submit" onClick={() => {
-                    dispatch({ type: "LOGOUT" });
-                  }}>
-                    Log out
-                  </button>
-                </li>
-              )
-            }
-          </Navlist>
-          {/* If location is this don't render */}
-          {/* {
+          <Link to="/faculty">
+            <li>Faculty</li>
+          </Link>
+          <Link to="/departments">
+            <li>Departments</li>
+          </Link>
+          <Link to="/societies">
+            <li>Societies</li>
+          </Link>
+          <Link to="/projects">
+            <li>Projects</li>
+          </Link>
+          {/* If Logged in Show this else dont */}
+          {
+            loggedIn
+            && (
+              <div>
+                <button type="submit" onClick={() => {
+                  dispatch({ type: "LOGOUT" });
+                }}>
+                  Log out
+                </button>
+              </div>
+            )
+          }
+        </Navlist>
+        {/* If location is this don't render */}
+        {/* {
           location.pathname !== "/" ? null : <SearchBar />
         } */}
-        </Search>
-      </Nav>
+      </Search>
+    </Nav>
   );
 }
 const Search = styled.div`
@@ -144,32 +144,52 @@ const Navlist = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
+
   li {
     font-family: 'Signika', sans-serif;
     padding-right: 1rem;
     color: white;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: all ease 0.8s;
+    font-size: 0.95rem;
+    transition: all ease 0.6s;
   }
-  li:hover {
+
+  &:hover li {
+    opacity: 0.3;
+  }
+
+  & li:hover{
+    opacity: 1;
+  }
+
+  /* Set Active Li to Blue */
+  & li:active {
     color: #3991dd;
   }
+
+
   button {
-    background: #3991dd;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all ease 0.6s;
-    text-align: center;
+  border: 0;
+  background: #3991dd;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 20px;
+  border-radius: 6px;
+  color: #f9f9f9;
+  font-family: inherit;
+  font-weight: 600;
+  width: 100%;
+  height: 35px;
+  font-size: 13px;
+  text-align: center;
+  transition: 0.6s all;
+  display: flex;
+  justify-content: space-between;
   }
   button:hover {
-    /* Make the buttonn a little bigger */
-    transform: scale(1.1);
-    /* Little darker and glowy */
-    box-shadow: 0 0 2px #3991dd, 0 0 20px #3991dd, 0 0 30px #3991dd;
+
+    transform: scale(1.05);
+    background: #216ce7;
   }
 
   @media (max-width: 768px) {

@@ -376,3 +376,26 @@ export const Btn = styled.input`
     background: transparent;
   }
 `;
+
+export const TabButton = styled.button`
+border: none;
+outline: 2px solid #3883c5;
+background: transparent;
+color: #3883c5;
+cursor: pointer;
+font-weight: bold;
+padding: 5px 4px;
+transition: 0.4s;
+margin-top: 1rem;
+margin-right: 0.9rem;
+border-radius: 0.2rem;
+
+
+/* Hover */
+&:hover{
+transform: translateY(-0.3rem);
+color: #355C7D;
+outline: 2px solid #355C7D;
+}
+
+`;
