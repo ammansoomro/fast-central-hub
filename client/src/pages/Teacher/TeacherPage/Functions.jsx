@@ -115,3 +115,13 @@ export async function GetTeacherData(params, setTeacher, setTeacherAbout) {
         console.log(err);
     }
 }
+
+export async function GetBackGround(teacher, setBackgroundpicture) {
+    const res = await fetch(`/departments/backgroundpicture/${teacher.department}`, {
+        headers: {
+            token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        }
+    });
+    const data = await res.json();
+    setBackgroundpicture(data);
+}

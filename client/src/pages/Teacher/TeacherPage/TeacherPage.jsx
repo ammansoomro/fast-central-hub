@@ -10,7 +10,7 @@ import "./Page.css";
 import avatar from "./Avatar.png";
 import { motion } from 'framer-motion';
 import { Wrapper, TeacherBanner, Image, Container, Card, CardImage, TeacherDetails, TabButton, TabHeading, Grid, AlreadyReviewed, CourseCard, CourseCardImage, Btn, DelReview } from './Style.jsx';
-import { DeleteReview, AddReview, GetTeacherData, GetTeacherCoursesData, GetTeacherUpVotes, GetTeacherDownVotes, GetTeacherReviews, CheckAlreadyReviewed } from './Functions.jsx';
+import { DeleteReview, AddReview, GetTeacherData, GetTeacherCoursesData, GetTeacherUpVotes, GetTeacherDownVotes, GetTeacherReviews, CheckAlreadyReviewed,GetBackGround } from './Functions.jsx';
 
 const TeacherPage = () => {
     const params = useParams();
@@ -53,22 +53,10 @@ const TeacherPage = () => {
             await GetTeacherUpVotes(params, setTeacherUpvotes);
             await GetTeacherDownVotes(params, setTeacherDownvotes);
             await GetTeacherReviews(params, setTeacherReviews);
+            await GetBackGround(teacher, setBackgroundpicture);
         };
         PullData();
-    }, [alreadyReviewed, teacherReviews, params.id]);
-
-    useEffect(() => {
-        const getBackground = async () => {
-            const res = await fetch(`/departments/backgroundpicture/${teacher.department}`, {
-                headers: {
-                    token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-                }
-            });
-            const data = await res.json();
-            setBackgroundpicture(data);
-        };
-        getBackground();
-    }, [teacher.department]);
+    }, [alreadyReviewed, teacherReviews, params.id,teacher.department]);
 
     return (
         <Wrapper
@@ -281,5 +269,7 @@ const TeacherPage = () => {
 }
 
 export default TeacherPage;
+
+
 
 
