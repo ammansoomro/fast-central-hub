@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./Page.css";
 import Rating from '@mui/material/Rating';
-import swal from "sweetalert";
-import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton } from "./Style";
-import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating } from "./Functions";
+import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton, CourseCard, CourseCardImage } from "./Style.jsx";
+import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating,DelReview, AddReview } from "./Functions.jsx";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-// import StarIcon from '@mui/icons-material/Star';
 const labels = {
     1: 'Useless',
     2: 'Hmmmm',
@@ -31,7 +29,7 @@ const Course = () => {
     const [courseReviews, setCourseReviews] = useState([]);
     const [review, setReview] = useState("");
     // const [vote, setVote] = useState("upvote");
-    const [alreadyReviewed, setAlreadyReviewd] = useState(false);
+    const [alreadyReviewed, setAlreadyReviewed] = useState(false);
     const [tab, setTab] = useState(2);
     const [rating, setRating] = useState(3);
     const [courseRating, setCourseRating] = useState(0);
@@ -39,54 +37,12 @@ const Course = () => {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
     }
 
-    const deleteReview = async (id) => {
-        // Swal are you sure you want to delete, After yes then delete
-
-        await fetch(`/reviewCourses/${id}`, {
-            method: "DELETE",
-            headers: {
-                token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-            },
-        });
-        // eslint-disable-next-line 
-        setAlreadyReviewd(false);
-        swal({
-            title: "Review Deleted",
-            icon: "success",
-            text: "Your review has been deleted",
-            button: false,
-            timer: 1800,
-        });
-    };
+    async function deleteReview(id) {
+        await DelReview(id, setAlreadyReviewed);
+    }
 
     const submitReview = async (e) => {
-        e.preventDefault();
-        // eslint-disable-next-line
-        const res = await fetch(`/reviewCourses`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-            },
-            body: JSON.stringify({
-                review: review,
-                // upvote: vote === "upvote" ? 1 : 0,
-                // downvote: vote === "downvote" ? 1 : 0,
-                course_id: params.id,
-                // Get user._id from localstorage
-                user_id: JSON.parse(localStorage.getItem("user"))._id,
-                rating: rating,
-            }),
-        });
-
-        setReview("");
-        swal({
-            title: "Review Submitted",
-            icon: "success",
-            text: "Your review has been submitted",
-            button: false,
-            timer: 1800,
-        });
+        await AddReview(e, review, params, rating, setReview);
     };
 
     useEffect(() => {
@@ -107,7 +63,7 @@ const Course = () => {
             setTeacherIds([...new Set(res6.map((item) => item.teacher_id))]);
 
             const res7 = await getAlreadyReviewed(params.id);
-            setAlreadyReviewd(res7);
+            setAlreadyReviewed(res7);
 
             const res8 = await getCourseRating(params.id);
             setCourseRating(res8);
@@ -387,48 +343,7 @@ const Grid = styled(motion.div)`
 `;
 
 
-const CourseCard = styled.div`
-  width: 120px;
-  height: 150px;
-  background: linear-gradient(
-360deg,
-#161616b9 35%,
-rgba(73, 73, 73, 0.23) 64%
-);
-  /* position: relative; */
-  transition: all ease 0.3s;
-    /* border: 1px solid rgb(255, 255, 255); */
-  border-radius: 1.4rem !important;
-    /* Reduct Brightness */
-    filter: brightness(0.9);
-    &:hover {
-        border: 1px solid #3582c6;
-    }
 
-    &:hover .body {
-        opacity: 1;
-    }
-`;
-
-const CourseCardImage = styled.div`
-    border-radius: 1.4rem;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-360deg,
-#161616b9 35%,
-rgba(73, 73, 73, 0.23) 64%
-);
-    img {
-        border-radius: 1.4rem;
-        filter: brightness(0.9);
-
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-        object-position: center;
-    }
-`;
 
 
 export default Course;
