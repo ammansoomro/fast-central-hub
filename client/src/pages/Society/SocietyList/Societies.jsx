@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style'
+import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style.jsx'
 import { useEffect, useState } from 'react'
+import { getSocieties,getSocietiesOnSearch } from './Funtions'
 
 const Societies = () => {
 
@@ -10,44 +11,29 @@ const Societies = () => {
   const [search, setSearch] = useState("");
   
   useEffect(() => {
-    const getSocieties = async () => {
+    const PullData = async () => {
       try {
-        const res = await axios.get('/societies')
-        setSocieties(res.data)
+        return await getSocieties(setSocieties)
       } catch (err) {
         console.log(err)
       }
     }
-    getSocieties()
+    PullData()
   }, [])
 
   useEffect(() => {
-    const getSocieties = async () => {
+    const PullData = async () => {
       try {
         if (search === "") {
-          const res = await axios.get("/societies", {
-            headers: {
-              token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-            }
-          });
-          // Sort Data and Store in Courses
-          setSocieties(res.data);
-          return;
+          return await getSocieties(setSocieties)
         }
-        const res = await axios.get(`/societies/search/${search}`, {
-          headers: {
-            token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          }
-        });
-        // Sort Data and Store in Courses
-        setSocieties(res.data);
+        await getSocietiesOnSearch(search, setSocieties)
       } catch (err) {
         console.log(err);
       }
     };
-    getSocieties();
+    PullData();
   }, [search]);
-
 
   return (
     <Wrapper>
@@ -107,6 +93,7 @@ const Societies = () => {
 }
 
 
-
-
 export default Societies 
+
+
+
