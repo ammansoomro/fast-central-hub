@@ -13,7 +13,7 @@ const SocietyPage = () => {
         const PullData = async () => {
             try {
                 const data = await GetSocietyData(params);
-                setSocietyfa-stack(data);
+                setSociety(data);
                 setSocietyAbout(data.description);
                 const data2 = await GetSocietyEvents(params);
                 setEvents(data2);
