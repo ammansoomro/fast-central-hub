@@ -1,6 +1,4 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style.jsx'
 import { useEffect, useState } from 'react'
 import { getSocieties,getSocietiesOnSearch } from './Funtions.jsx'

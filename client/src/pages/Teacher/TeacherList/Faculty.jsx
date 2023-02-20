@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import ReactPaginate from 'react-paginate';
-import { StyledPaginateContainer, CardText, CardHover, CardImage, Card, Grid, Searchbar, SelectDepartment, TopMenu, Wrapper } from './Style'
-import { getTeachers, getTotalFaculty, getFacultyByPage, getTotalFacultyByDepartment, getFacultyByDepartmentAndPage, getFacultyOnSearch, getTeacherVotes } from './Functions'
+import { StyledPaginateContainer, CardText, CardHover, CardImage, Card, Grid, Searchbar, SelectDepartment, TopMenu, Wrapper } from './Style.jsx'
+import { getTeachers, getTotalFaculty, getFacultyByPage, getTotalFacultyByDepartment, getFacultyByDepartmentAndPage, getFacultyOnSearch, getTeacherVotes } from './Functions.jsx'
 
 const Faculty = () => {
   const [teachers, setTeachers] = useState([]);
