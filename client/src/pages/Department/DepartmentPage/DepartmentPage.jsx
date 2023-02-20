@@ -1,25 +1,14 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
-import { Wrapper, DepartmentBanner, Image, Container, Card, CardImage, DepartmentDetails, TabHeading, Grid, TeacherCard, TeacherCardImage, TabButton} from './Style'
-import { getDepartment,getDepartmentTeachers} from './Functions'
+import { Wrapper, DepartmentBanner, Image, Container, Card, CardImage, DepartmentDetails, TabHeading, Grid, TeacherCard, TeacherCardImage, TabButton} from './Style.jsx'
+import { getDepartment,getDepartmentTeachers} from './Functions.jsx'
 const DepartmentPage = () => {
     const params = useParams();
     const [department, setDepartment] = useState({});
     const [departmentAbout, setDepartmentAbout] = useState("");
-    const [departmentTeachers, setDepartmentTeachers] = useState([
-        {
-            name: "Loading...",
-            email: "Loading...",
-            picture: "Loading...",
-            department: "Loading...",
-            about: "Loading...",
-            _id: "Loading...",
-        }
-    ]);
+    const [departmentTeachers, setDepartmentTeachers] = useState([{name: "Loading...",email: "Loading...",picture: "Loading...",department: "Loading...",about: "Loading...",_id: "Loading...",}]);
     const [tab, setTab] = useState(2);
-
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         const pullData = async () => {
@@ -46,12 +35,7 @@ const DepartmentPage = () => {
             exit={{ opacity: 0, y: 100 }}
             transition={{ duration: 0.5 }}>
             <DepartmentBanner>
-                <Image>
-                    {/* If department.department is AI then this image else that image */}
-                    {
-                        <img src={department.backgroundpicture} alt="Please Wait, Fetching Data..." />
-                    }
-                </Image>
+                <Image>{<img src={department.backgroundpicture} alt="Please Wait, Fetching Data..." />}</Image>
                 <Container>
                     <div className="title-container">
                         <div className="title-top">
