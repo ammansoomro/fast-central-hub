@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { GetSocietyData, GetSocietyEvents } from './Functions';
+import { GetSocietyData, GetSocietyEvents } from './Functions.jsx';
 import { Wrapper, SocietyBanner, Image, Container, Card, CardImage, SocietyDetails } from './Style';
 
 const SocietyPage = () => {
