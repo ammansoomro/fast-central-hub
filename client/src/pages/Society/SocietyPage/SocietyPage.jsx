@@ -7,19 +7,13 @@ const SocietyPage = () => {
     const params = useParams();
     const [society, setSociety] = useState({});
     const [societyAbout, setSocietyAbout] = useState("");
-    const [events, setEvents] = useState([
-        {
-            name: "Loading...",
-            description: "Loading...",
-            societyCode: "Loading...",
-        },
-    ]);
+    const [events, setEvents] = useState([{name: "Loading...",description: "Loading...",societyCode: "Loading...",},]);
 
     useEffect(() => {
         const PullData = async () => {
             try {
                 const data = await GetSocietyData(params);
-                setSociety(data);
+                setSocietyfa-stack(data);
                 setSocietyAbout(data.description);
                 const data2 = await GetSocietyEvents(params);
                 setEvents(data2);
