@@ -46,12 +46,9 @@ const DepartmentPage = () => {
                                 <span>{department.code}</span>
                             </div>
                             <div className="departmentdescription">
-                                {/* IF No Department About then do this else that */}
                                 {
                                     department.about === "" ?
-                                        <p>No Description Available for this Department.</p>
-                                        :
-                                        <p>{departmentAbout.substring(0, 2500)}</p>
+                                        <p>No Description Available for this Department.</p>:<p>{departmentAbout.substring(0, 2500)}</p>
                                 }
                             </div>
                         </div>

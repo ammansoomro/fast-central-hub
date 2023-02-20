@@ -22,7 +22,7 @@ const SocietyPage = () => {
             }
         };
         PullData();
-    }, [params.id]);
+    }, [params.id,params]);
 
 
     return (

@@ -44,7 +44,7 @@ const TeacherPage = () => {
             await CheckAlreadyReviewed(params, setAlreadyReviewed);
         };
         PullData();
-    }, [params.id]);
+    }, [params.id,params]);
 
     useEffect(() => {
         const PullData = async () => {
@@ -55,7 +55,7 @@ const TeacherPage = () => {
             await GetBackGround(teacher, setBackgroundpicture);
         };
         PullData();
-    }, [alreadyReviewed, teacherReviews, params.id,teacher.department]);
+    }, [alreadyReviewed, teacherReviews, params.id,teacher.department,teacher,params]);
 
     return (
         <Wrapper

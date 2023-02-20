@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getDepartments, getDepartmentsOnSearch } from './Functions'
-import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style'
+import { getDepartments, getDepartmentsOnSearch } from './Functions.jsx'
+import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style.jsx'
 
 const Departments = () => {
   const [departments, setDepartments] = useState([])
