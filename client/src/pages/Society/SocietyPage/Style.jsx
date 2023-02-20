@@ -56,11 +56,6 @@ text-align: center;
         cursor: pointer;
     }
 
-    /* &:hover p{
-        color: #fff;
-        opacity: 0.6;
-    } */
-
     &:hover h3{
         opacity: 1;
     }

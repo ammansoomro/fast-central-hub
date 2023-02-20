@@ -270,11 +270,8 @@ const Course = () => {
                                     {courseReviews.map((review) => {
                                         return (
                                             <>
-                                                <div class="post">
+                                                <div class="post review">
                                                     <div class="post-top">
-                                                        <div class="dp">
-                                                            <Avatar></Avatar>
-                                                        </div>
                                                         <div class="post-info">
                                                             <div className="postRating">
                                                                 <p class="name">{review.rating}</p>

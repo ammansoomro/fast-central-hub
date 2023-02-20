@@ -215,7 +215,7 @@ const TeacherPage = () => {
                             {teacherReviews.map((review) => {
                                 return (
                                     <>
-                                        <div class="post">
+                                        <div class="post review">
                                             <div class="post-top">
                                                 <div class="dp">
                                                     {/* If review.upvote = 1 then this picture else that picture */}

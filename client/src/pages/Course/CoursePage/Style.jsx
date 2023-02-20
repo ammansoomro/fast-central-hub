@@ -20,7 +20,6 @@ border: none;
 &:hover {
   background: #bf1e1e;
   box-shadow: 0 0 5px #d33838, 0 0 10px #d33838, 0 0 15px #d33838, 0 0 20px #d33838, 0 0 25px #d33838, 0 0 30px #d33838;
-
 color: #fff;
 }
 `;
