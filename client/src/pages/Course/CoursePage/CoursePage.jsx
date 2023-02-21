@@ -49,7 +49,7 @@ const Course = () => {
         // Scroll to top with smooth animation
         const pullData = async () => {
 
-            const res = await getTeachers();
+            const res = await getTeachers(params.id);
             setTeachers(res);
 
             const res2 = await getCourse(params.id);
@@ -162,16 +162,16 @@ const Course = () => {
                                     TeacherIds.length === 0 ?
 
                                         <AlreadyReviewed>
-                                            No Courses Available for this Teacher.
+                                            No Material Available for this Course.
                                         </AlreadyReviewed>
                                         :
                                         <>
                                             <AlreadyReviewed>
-                                                Click on the Course to see the Course Material.
+                                                Click on the Teacher to see the Course Material.
                                             </AlreadyReviewed>
                                             <div className="courses">
                                                 {
-                                                    teachers.map((teacher) => {
+                                                    teachers?.map((teacher) => {
                                                         return (
                                                             <Link to={`/course/${course._id}/teacher/${teacher._id}`}
                                                                 key={teacher._id}>

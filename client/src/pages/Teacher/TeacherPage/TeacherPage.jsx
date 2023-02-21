@@ -104,6 +104,7 @@ const TeacherPage = () => {
                     <CardImage>
                         <img src={teacher?.picture} alt="Please Wait, Fetching Data..." />
                     </CardImage>
+                    <h4>{teacher.email}</h4>
                 </Card>
             </TeacherBanner>
             <TeacherDetails>

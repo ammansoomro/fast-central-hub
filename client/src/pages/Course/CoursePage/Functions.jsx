@@ -4,9 +4,9 @@ export const SortReviews = (a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
 };
 
-export const getTeachers = async () => {
+export const getTeachers = async (id) => {
     try {
-        const res = await fetch("/facultys", {
+        const res = await fetch(`/courses/faculty/${id}`, {
             method: "GET",
             headers: {
                 token:

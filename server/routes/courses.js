@@ -2,7 +2,8 @@ const router = require('express').Router();
 const Course = require('../Models/Course');
 const verify = require('./verifyToken');
 const Review = require('../Models/ReviewCourse');
-
+const Material = require('../Models/Material');
+const Faculty = require('../Models/Faculty');
 // 1. CREATE
 // 2. UPDATE
 // 3. DELETE Along with all the reviews associated with it
@@ -256,6 +257,23 @@ router.get('/page/:page/:code', verify, async (req, res) => {
 );
 
 // Pagination on Search
+
+
+
+
+// Get all faculty of a course, if the given course id matches with the course id in the material collection
+router.get('/faculty/:course_id', verify, async (req, res) => {
+    try {
+        const faculties = await Material.find({ course_id: req.params.course_id });
+        // Get Unique Faculty_id from faculties array and then get all the faculty details from the faculty collection
+        const unique_faculty_ids = [...new Set(faculties.map(faculty => faculty.teacher_id))];
+        const faculty_details = await Faculty.find({ _id: { $in: unique_faculty_ids } });
+        res.status(200).json(faculty_details);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
 
 
 

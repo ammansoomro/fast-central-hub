@@ -79,15 +79,20 @@ export async function GetTeacherDownVotes(params, setTeacherDownvotes) {
     setTeacherDownvotes(data);
 }
 export async function GetTeacherUpVotes(params, setTeacherUpvotes) {
-    const res = await fetch("/reviewfaculties/upvote/" + params.id,
-        {
-            headers: {
-                token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-            }
-        });
-    const data = await res.json();
-    setTeacherUpvotes(data);
+    try {
+        const res = await fetch("/reviewfaculties/upvote/" + params.id,
+            {
+                headers: {
+                    token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+                }
+            });
+        const data = await res.json();
+        setTeacherUpvotes(data);
+    } catch (error) {
+        console.error("Error in GetTeacherUpVotes:", error);
+    }
 }
+
 export async function GetTeacherCoursesData(params, setCourses) {
     try {
         const res = await fetch(`/facultys/courses/${params.id}`, {

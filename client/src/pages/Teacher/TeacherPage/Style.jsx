@@ -278,6 +278,11 @@ export const Card = styled.div`
   position: relative;
   border-radius: 1rem;
   margin-top: 1rem;
+
+  h4{
+    text-align: center;
+    padding: 0.5rem 0;
+  }
 `;
 
 export const VoteSelect = styled.select`
