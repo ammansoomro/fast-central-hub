@@ -5,11 +5,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 
-import "./Page.css";
-import avatar from "./Avatar.png";
+import "./Assets/Page.css";
+import Avatar from '@mui/material/Avatar';
 import { motion } from 'framer-motion';
 import { Wrapper, TeacherBanner, Image, Container, Card, CardImage, TeacherDetails, TabButton, TabHeading, Grid, AlreadyReviewed, CourseCard, CourseCardImage, Btn, DelReview } from './Style.jsx';
-import { DeleteReview, AddReview, GetTeacherData, GetTeacherCoursesData, GetTeacherUpVotes, GetTeacherDownVotes, GetTeacherReviews, CheckAlreadyReviewed,GetBackGround } from './Functions.jsx';
+import { DeleteReview, AddReview, GetTeacherData, GetTeacherCoursesData, GetTeacherUpVotes, GetTeacherDownVotes, GetTeacherReviews, CheckAlreadyReviewed, GetBackGround } from './Functions.jsx';
 
 const TeacherPage = () => {
     const params = useParams();
@@ -44,7 +44,7 @@ const TeacherPage = () => {
             await CheckAlreadyReviewed(params, setAlreadyReviewed);
         };
         PullData();
-    }, [params.id,params]);
+    }, [params.id, params]);
 
     useEffect(() => {
         const PullData = async () => {
@@ -55,7 +55,7 @@ const TeacherPage = () => {
             await GetBackGround(teacher, setBackgroundpicture);
         };
         PullData();
-    }, [alreadyReviewed, teacherReviews, params.id,teacher.department,teacher,params]);
+    }, [alreadyReviewed, teacherReviews, params.id, teacher.department, teacher, params]);
 
     return (
         <Wrapper
@@ -176,7 +176,10 @@ const TeacherPage = () => {
                                 <div class="post create CreatePost">
                                     <div class="post-top">
                                         <div class="dp">
-                                            <img src={avatar} alt="" />
+                                            <Avatar>
+                                                {/* First Letter Of Login in user username from local storage cookie */}
+                                                {JSON.parse(localStorage.getItem("user")).username.charAt(0).toUpperCase()}
+                                            </Avatar>
                                         </div>
                                         <input
                                             type="text"

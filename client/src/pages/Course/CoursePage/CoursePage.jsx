@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import "./Page.css";
+import "./Assets/Page.css";
 import Rating from '@mui/material/Rating';
 import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton, CourseCard, CourseCardImage } from "./Style.jsx";
 import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating,DelReview, AddReview } from "./Functions.jsx";
