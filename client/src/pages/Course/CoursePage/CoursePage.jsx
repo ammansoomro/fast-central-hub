@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./Assets/Page.css";
 import Rating from '@mui/material/Rating';
-import { DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton, CourseCard, CourseCardImage } from "./Style.jsx";
+import { Grid,DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton, CourseCard, CourseCardImage } from "./Style.jsx";
 import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating,DelReview, AddReview } from "./Functions.jsx";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -316,28 +316,6 @@ const Course = () => {
 };
 
 
-const Grid = styled(motion.div)`
-    padding: 1.5rem 0rem;
-    .courses {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 4.5rem 1rem;
-    }
-    .nocourses {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: #000;
-        }
-    }
-`;
 
 
 

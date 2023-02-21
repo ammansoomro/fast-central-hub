@@ -150,7 +150,7 @@ export const getCourseRating = async (id) => {
 export async function AddReview(e, review, params, rating, setReview) {
     e.preventDefault();
     // eslint-disable-next-line
-    const res = await fetch(`/reviewCourses`, {
+    await fetch(`/reviewCourses`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

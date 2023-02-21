@@ -503,3 +503,27 @@ rgba(73, 73, 73, 0.23) 64%
         object-position: center;
     }
 `;
+
+
+export const Grid = styled(motion.div)`
+    padding: 1.5rem 0rem;
+    .courses {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 4.5rem 1rem;
+    }
+    .nocourses {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #000;
+        }
+    }
+`;
