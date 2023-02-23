@@ -13,6 +13,7 @@ const departmentRoute = require('./routes/departments');
 const reviewFacultyRoute = require('./routes/reviewfaculties');
 const societyRoute = require('./routes/societies');
 const eventRoute = require('./routes/events');
+const projectRoute = require('./routes/projects');
 dotenv.config();
 
 mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
@@ -32,6 +33,7 @@ app.use('/api/departments', departmentRoute);
 app.use('/api/reviewfaculties', reviewFacultyRoute);
 app.use('/api/societies', societyRoute);
 app.use('/api/events', eventRoute);
+app.use('/api/projects', projectRoute);
 app.listen(8800, () => {
     console.log('Backend Server is Running : 8800');
     }
