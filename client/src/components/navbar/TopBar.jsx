@@ -90,6 +90,8 @@ const Search = styled.div`
   display: flex;
 `;
 const Nav = styled.div`
+/* Little white faded box-shadow at bottom */
+  box-shadow: 1px 1px 15px rgba(255, 255, 255, 0.09);
 z-index:  100;
 top: 0;
   background: #050508;

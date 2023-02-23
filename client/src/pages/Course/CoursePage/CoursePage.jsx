@@ -7,15 +7,13 @@ import { Grid,DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, 
 import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating,DelReview, AddReview } from "./Functions.jsx";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const labels = {
-    1: 'Useless',
-    2: 'Hmmmm',
-    3: 'Ezz',
-    4: 'GPA+',
-    5: 'GPA++',
+    1: 'Worst',
+    2: 'Poor',
+    3: 'Average',
+    4: 'Good',
+    5: 'Excellent',
 };
 
 

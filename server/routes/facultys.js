@@ -246,6 +246,4 @@ router.get('/courses/:id', verify, async (req, res) => {
 );
 
 
-
-
 module.exports = router;

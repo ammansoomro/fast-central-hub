@@ -6,7 +6,7 @@ import TeacherPage from './Teacher/TeacherPage/TeacherPage';
 import TeacherList from './Teacher/TeacherList/Faculty';
 import SocietyPage from './Society/SocietyPage/SocietyPage';
 import SocietyList from './Society/SocietyList/Societies';
-import Material from './Material/Material/CourseTeacher';
+import Material from './Material/MaterialPage';
 import Home from './Home/Home';
 import PageNotFound from './PageNotFound/ErrorPage';
 import ProjectList from './Project/ProjectList/Projects';
