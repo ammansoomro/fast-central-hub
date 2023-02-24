@@ -55,7 +55,7 @@ const ProjectPage = () => {
                                     project.abstract === "" ?
                                         <p>No Description Available for this Project.</p>
                                         :
-                                        <p>{projectAbstract.substring(0, 1850)}</p>
+                                        <p>{projectAbstract.substring(0, 2440)}</p>
                                 }
                             </div>
                         </div>
