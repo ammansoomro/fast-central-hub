@@ -14,6 +14,7 @@ import Login from './User/Login/Login';
 import Navbar from '../components/navbar/TopBar';
 import Footer from '../components/footer/Footer';
 import Register from './User/Register/Register';
+import Project from './Project/ProjectPage/ProjectPage';
 // Export all components
 export {
         CoursePage, 
@@ -31,5 +32,6 @@ export {
         Login,
         Navbar,
         Footer,
-        Register
+        Register,
+        Project,
 };
