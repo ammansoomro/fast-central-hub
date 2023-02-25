@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { GetCourses, getUniqueCodes, searchOnCourseName, getCoursesRating, getTotalCourses, getCoursesByPage, getTotalCoursesByCode, getCoursesByPageAndCode } from './Functions.jsx'
-import { Wrapper, Grid, Card, CardImage, CardHover, CardText, Searchbar, SelectCourseCode, TopMenu, StyledPaginateContainer } from './Style.jsx'
+import { useEffect, useState } from "react";
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
+import { CodeAndPage, CourseByPage, AllCourses, CourseRating, TotalByCode, TotalCourses, UniqueCodes, SearchedCourse } from './Functions.jsx';
+import { Card, CardHover, CardImage, CardText, Grid, Searchbar, SelectCourseCode, StyledPaginateContainer, TopMenu, Wrapper } from './Style.jsx';
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [coursecode, setCoursecode] = useState("All");
@@ -21,15 +21,10 @@ const Courses = () => {
 
   useEffect(() => {
     const pullData = async () => {
-      const res = await GetCourses();
-      const res2 = await getUniqueCodes();
-      const res4 = await getCoursesRating();
-      const res5 = await getTotalCourses();
-      setCourses((res));
-      setUniqueCodes(res2);
-      setCourseRating(res4);
-      setTotalCourses(res5);
-
+      await AllCourses(setCourses);
+      await UniqueCodes(setUniqueCodes);
+      await CourseRating(setCourseRating);
+      await TotalCourses(setTotalCourses);
     };
     pullData();
   }, []);
@@ -37,17 +32,13 @@ const Courses = () => {
   useEffect(() => {
     const pullData = async () => {
       if (coursecode === "All") {
-        const res = await getCoursesByPage(pageNumber);
-        setCourses(res);
-        const res2 = await getTotalCourses();
-        setTotalCourses(res2);
+        await CourseByPage(pageNumber, setCourses);
+        await TotalCourses(setTotalCourses);
         return;
       }
       else {
-        const res3 = await getTotalCoursesByCode(coursecode);
-        const res4 = await getCoursesByPageAndCode(pageNumber,coursecode);
-        setTotalCourses(res3);
-        setCourses(res4);
+        await TotalByCode(coursecode, setTotalCourses);
+        await CodeAndPage(pageNumber, coursecode, setCourses);
       }
     };
     pullData();
@@ -56,15 +47,12 @@ const Courses = () => {
   useEffect(() => {
     const pullData = async () => {
       if (search === "") {
-        const res = await GetCourses();
-        setCourses(res);
-        const res2 = await getTotalCourses();
-        setTotalCourses(res2);
+        await AllCourses(setCourses);
+        await TotalCourses(setTotalCourses);
         return;
       }
       else {
-        const res = await searchOnCourseName(search);
-        setCourses(res);
+        await SearchedCourse(search, setCourses);
       }
     };
     pullData();
@@ -192,3 +180,9 @@ const Courses = () => {
 };
 
 export default Courses;
+
+
+
+
+
+

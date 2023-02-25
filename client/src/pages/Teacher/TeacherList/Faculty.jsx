@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
 import ReactPaginate from 'react-paginate';
-import { StyledPaginateContainer, CardText, CardHover, CardImage, Card, Grid, Searchbar, SelectDepartment, TopMenu, Wrapper } from './Style.jsx'
-import { getTeachers, getTotalFaculty, getFacultyByPage, getTotalFacultyByDepartment, getFacultyByDepartmentAndPage, getFacultyOnSearch, getTeacherVotes } from './Functions.jsx'
+import { Link } from 'react-router-dom';
+import { getFacultyByDepartmentAndPage, getFacultyByPage, getFacultyOnSearch, getTeachers, getTeacherVotes, getTotalFaculty, getTotalFacultyByDepartment } from './Functions.jsx';
+import { Card, CardHover, CardImage, CardText, Grid, Searchbar, SelectDepartment, StyledPaginateContainer, TopMenu, Wrapper } from './Style.jsx';
 
 const Faculty = () => {
   const [teachers, setTeachers] = useState([]);
