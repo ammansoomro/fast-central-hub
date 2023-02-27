@@ -47,17 +47,21 @@ router.post('/login', async (req, res) => {
         } 
         const accessToken = jwt.sign({
             id: user._id,
-            isAdmin: user.isAdmin},
-            process.env.PASS_SEC,
-            {expiresIn: "5d"}
-        );
+            isAdmin: user.isAdmin,
+            exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30 * 12)
+        },
+        process.env.PASS_SEC);
         const { password, ...others } = user._doc;
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 30 * 12
+        });
         return res.status(200).json({...others, accessToken});
     } catch (err) {
         return res.status(500).json(err);
     }
-}
-);
+});
+
 
 
 // Export the router
