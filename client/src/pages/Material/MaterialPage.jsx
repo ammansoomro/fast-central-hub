@@ -18,7 +18,7 @@ const CourseTeacher = () => {
       await GetTeacher(params, setTeacher);
     };
     PullData();
-  }, [params.id, params.teacher_id]);
+  }, [params.id, params.teacher_id,params]);
 
   useEffect(() => {
     const GetMaterialByType = async () => {
@@ -36,7 +36,7 @@ const CourseTeacher = () => {
       setMaterials(data);
     };
     GetMaterialByType();
-  }, [type]);
+  }, [type, params]);
 
   return (
     <div>

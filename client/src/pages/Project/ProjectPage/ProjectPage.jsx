@@ -14,7 +14,7 @@ const ProjectPage = () => {
             setProjectAbstract(projectFromServer.abstract)
         }
         getProject()
-    }, [])
+    }, [id])
 
     const fetchProject = async (id) => {
         const res = await axios.get(`/projects/find/${id}`, {
