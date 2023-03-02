@@ -34,9 +34,9 @@ const ProjectPage = () => {
             <ProjectBanner>
                 <Image>
                     {project.type === "Research" ? (
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2F3357684.jpg?alt=media&token=a9cf75f1-2103-4aa9-a7a0-c9376cad08b2" alt={project.code} />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FResearch02.png?alt=media&token=ca1f48ab-848a-4fa3-9a0e-d1454a8df42a" alt={project.code} />
                     ) : (
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2F3408105.jpg?alt=media&token=38c14d17-d551-447c-9cb8-295977a2a4a4" alt={project.code} />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
                     )
                     }
                 </Image>

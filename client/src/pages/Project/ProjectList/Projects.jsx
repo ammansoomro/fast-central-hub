@@ -60,9 +60,9 @@ const Projects = () => {
                     
                     {
                       project.type === "Research" ? (
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-02-24%20at%204.29.32%20AM.png?alt=media&token=a47fea83-19b3-4195-99b4-e81c3396f37c" alt={project.code} />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FResearch02.png?alt=media&token=ca1f48ab-848a-4fa3-9a0e-d1454a8df42a" alt={project.code} />
                       ) : (
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-02-24%20at%204.31.28%20AM.png?alt=media&token=b26f6a78-8184-4913-8bb7-78c1b8717cd6" alt={project.code} />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
                       )
                     }
 
