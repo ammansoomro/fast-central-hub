@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style.jsx'
 import { useEffect, useState } from 'react'
-import { getSocieties,getSocietiesOnSearch } from './Funtions.jsx'
+import { getSocieties, getSocietiesOnSearch } from './Funtions.jsx'
 
 const Societies = () => {
 
   const [societies, setSocieties] = useState([])
   const [search, setSearch] = useState("");
-  
+
   useEffect(() => {
     const PullData = async () => {
       try {
@@ -36,8 +36,7 @@ const Societies = () => {
   return (
     <Wrapper>
       <TopMenu>
-        {/*  */}
-        {/* <SearchBar /> */}
+
         <Searchbar>
           <input class="search__input" value={search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Quick Search" />
         </Searchbar>
@@ -91,7 +90,7 @@ const Societies = () => {
 }
 
 
-export default Societies 
+export default Societies
 
 
 

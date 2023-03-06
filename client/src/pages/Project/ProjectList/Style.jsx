@@ -211,3 +211,30 @@ export const TopMenu = styled.div`
       flex-direction: column;
   }
 `;
+
+export const SelectType = styled.select`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.1rem;
+  height: 30px;
+  background: transparent;
+  font-size: 0.8rem;
+  color: #3883c5;
+  min-width: 200px;
+  max-width: 200px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  margin-right: 1rem;
+  /* text-transform: uppercase; */
+  cursor: pointer;
+  transition: ease-in-out 0.5s;
+  font-weight: bold;
+  padding: 0px 15px;
+  border: none;
+  border-bottom: 2px solid #3883c5;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+  }
+`;

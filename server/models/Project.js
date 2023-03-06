@@ -29,6 +29,10 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    domain: {
+        type: String,
+        default: ""
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model("Project", ProjectSchema);

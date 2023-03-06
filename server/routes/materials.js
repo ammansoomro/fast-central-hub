@@ -110,18 +110,18 @@ router.get('/byteacher/:teacher_id', verify, async (req, res) => {
 
 // ==================== GET ALL BY COURSE AND TEACHER ====================
 router.get('/bycourseteacher/:course_id/:teacher_id', verify, async (req, res) => {
-        try {
-            const materials = await Material.find({ course_id: req.params.course_id, teacher_id: req.params.teacher_id });
-            res.status(200).json(materials);
-        } catch (err) {
-            res.status(500).json(err);
-        }
+    try {
+        const materials = await Material.find({ course_id: req.params.course_id, teacher_id: req.params.teacher_id });
+        res.status(200).json(materials);
+    } catch (err) {
+        res.status(500).json(err);
     }
+}
 );
 
 // ==================== Get ALL BY COURSE AND TEACHER AND TYPE ====================
 router.get('/bycourseteachertype/:course_id/:teacher_id/:type', verify, async (req, res) => {
-    if (req.user.isAdmin) {
+    if (req.user) {
         try {
             const materials = await Material.find({ course_id: req.params.course_id, teacher_id: req.params.teacher_id, type: req.params.type });
             res.status(200).json(materials);

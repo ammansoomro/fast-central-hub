@@ -84,6 +84,32 @@ router.get('/type/:type', async (req, res) => {
 }
 );
 
+// Get by Domain
+router.get('/domain/:domain', async (req, res) => {
+    try {
+        const projects = await Project.find({domain: req.params.domain});
+        res.status(200).json(projects);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
+
+// Get by Type and Domain
+router.get('/type/:type/domain/:domain', async (req, res) => {
+    try {
+        const projects = await Project.find({type: req.params.type, domain: req.params.domain});
+        res.status(200).json(projects);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}
+);
+
+
+
 
 
 

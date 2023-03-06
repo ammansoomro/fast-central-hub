@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getProjects, getProjectsOnSearch } from './Functions.jsx'
-import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar } from './Style.jsx'
+import { getProjects, getProjectsOnSearch, getProjectsOnType, getProjectsOnDomain, getProjectsOnTypeAndDomain } from './Functions.jsx'
+import { Wrapper, Grid, Card, CardImage, CardHover, CardText, TopMenu, Searchbar, SelectType } from './Style.jsx'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
   const [search, setSearch] = useState("");
+  const [type, setType] = useState("All");
+  const [domain, setDomain] = useState("All");
 
   useEffect(() => {
     const pullData = async () => {
@@ -14,6 +16,29 @@ const Projects = () => {
     }
     pullData()
   }, [])
+
+  useEffect(() => {
+    const pullData = async () => {
+      if (type === "All" && domain === "All") {
+        const res = await getProjects();
+        setProjects(res);
+        return;
+      }
+      if (type === "All") {
+        const res = await getProjectsOnDomain(domain);
+        setProjects(res);
+        return;
+      }
+      if (domain === "All") {
+        const res = await getProjectsOnType(type);
+        setProjects(res);
+        return;
+      }
+      const res = await getProjectsOnTypeAndDomain(type, domain);
+      setProjects(res);
+    }
+    pullData()
+  }, [type, domain])
 
   useEffect(() => {
     const pullData = async () => {
@@ -31,9 +56,36 @@ const Projects = () => {
   return (
     <Wrapper>
       <TopMenu>
+        <SelectType
+          className="select"
+          value={type}
+          // Onchange set Code and Page Number to 1
+          onChange={(e) => {
+            setType(e.target.value);
+            // setPageNumber(1);
+          }}
+        >
+          <option value="All">All</option>
+          <option value="Product">Product</option>
+          <option value="Research">Research</option>
+        </SelectType>
+        <SelectType
+          className="select"
+          value={domain}
+          // Onchange set Code and Page Number to 1
+          onChange={(e) => {
+            setDomain(e.target.value);
+            // setPageNumber(1);
+          }}
+        >
+          <option value="All">All</option>
+          <option value="CS">Computer Science</option>
+          <option value="EE">Electrical</option>
+        </SelectType>
         <Searchbar>
           <input class="search__input" value={search} onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Quick Search" />
         </Searchbar>
+
       </TopMenu>
       <Grid
         initial={{ opacity: 0 }}
@@ -57,7 +109,7 @@ const Projects = () => {
                 >
                   <CardImage>
                     {/* If project.type is "Research" then this image else */}
-                    
+
                     {
                       project.type === "Research" ? (
                         <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FResearch02.png?alt=media&token=ca1f48ab-848a-4fa3-9a0e-d1454a8df42a" alt={project.code} />
