@@ -21,7 +21,7 @@ const Departments = () => {
 
                         <Link
                             to={{
-                                pathname: `/announcement/Student`,
+                                pathname: `/announcement/Student Affairs`,
                             }}
                             key="Test"
                         >
@@ -38,7 +38,7 @@ const Departments = () => {
                                     <h2>Student Affairs</h2>
                                     <Link
                                         to={{
-                                            pathname: `/announcement/Student`,
+                                            pathname: `/announcement/Student Affairs`,
                                         }}
                                     >
                                         <button className="btn">View Announcements</button>
@@ -59,7 +59,7 @@ const Departments = () => {
 
                         <Link
                             to={{
-                                pathname: `/announcement/Academic`,
+                                pathname: `/announcement/Academic Affairs`,
                             }}
                             key="Test"
                         >
@@ -76,7 +76,7 @@ const Departments = () => {
                                     <h2>Academic Affairs</h2>
                                     <Link
                                         to={{
-                                            pathname: `/announcement/Academic`,
+                                            pathname: `/announcement/Academic Affairs`,
                                         }}
                                     >
                                         <button className="btn">View Announcements</button>
@@ -135,7 +135,7 @@ const Departments = () => {
 
                         <Link
                             to={{
-                                pathname: `/announcement/Career`,
+                                pathname: `/announcement/Career Services`,
                             }}
                             key="Test"
                         >
@@ -152,7 +152,7 @@ const Departments = () => {
                                     <h2>Career Services</h2>
                                     <Link
                                         to={{
-                                            pathname: `/announcement/Career`,
+                                            pathname: `/announcement/Career Services`,
                                         }}
                                     >
                                         <button className="btn">View Announcements</button>

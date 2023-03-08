@@ -65,5 +65,18 @@ router.get('/', verify, async (req, res) => {
 }
 );
 
-module.exports = router;
 
+// Get By Type
+router.get('/find/type/:type', verify, async (req, res) => {
+    try {
+        // const announcements = await Announcement.find({ type: req.params.type });
+        // Get announcement.date and format it in a nice way
+        const announcements = await Announcement.find({ type: req.params.type }).sort({ date: -1 });
+        res.status(200).json(announcements);
+    } catch (err) {
+        res.status(500).json(err);  
+    }
+}
+);
+
+module.exports = router;

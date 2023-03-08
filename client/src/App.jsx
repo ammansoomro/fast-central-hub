@@ -1,6 +1,6 @@
 import "./app.scss"
 import { Route, Routes, useLocation,useNavigate } from 'react-router-dom'
-import { CoursePage, CourseList, DepartmentPage, DepartmentList, TeacherPage, TeacherList, SocietyPage, SocietyList, Material, Home, PageNotFound, ProjectList, Login,Navbar, Footer,Register,Project,AnnouncementsList} from "./pages/ExportAll";
+import { CoursePage, CourseList, DepartmentPage, DepartmentList, TeacherPage, TeacherList, SocietyPage, SocietyList, Material, Home, PageNotFound, ProjectList, Login,Navbar, Footer,Register,Project,AnnouncementsList,AnnouncementPage} from "./pages/ExportAll";
 import {AuthContext}  from "./authContext/AuthContext"
 import {useContext,useEffect} from "react"
 import { Navigate } from "react-router-dom"
@@ -44,6 +44,7 @@ const App = () => {
               <Route path="/project/:id" element={<Project />} />
               <Route path="/course/:id/teacher/:teacher_id" element={<Material />} />
               <Route path="/announcements" element={<AnnouncementsList />} />
+              <Route path="/announcement/:id" element={<AnnouncementPage />} />
               <Route path="*" element={<PageNotFound />} />
             </>
           )
