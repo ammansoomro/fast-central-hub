@@ -64,7 +64,7 @@ router.get('/find/:id', verify, async (req, res) => {
 // ==================== GET ALL ====================
 router.get('/', verify, async (req, res) => {
     try {
-        const events = await Event.find();
+        const events = await Event.find().sort({name: 1});
         res.status(200).json(events);
     }
     catch (err) {

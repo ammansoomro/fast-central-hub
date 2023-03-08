@@ -52,7 +52,11 @@ router.get('/find/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     const query = req.query.new;
     try {
-        const projects = query ? await Project.find().sort({_id: -1}).limit(5) : await Project.find();
+        const projects = query ? await Project.find().sort({_id: -1}).limit(5) :
+        // Sort project on name
+        await Project.find().sort({name: 1});
+
+        // Sort project on Name
         res.status(200).json(projects);
     }
     catch (err) {

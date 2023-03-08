@@ -66,7 +66,7 @@ router.get('/', async (req, res) => {
                 { $sample: { size: 6 } },
             ]);
         } else {
-            departments = await Department.find();
+            departments = await Department.find().sort({name: 1});
         }
         res.status(200).json(departments);
     } catch (err) {

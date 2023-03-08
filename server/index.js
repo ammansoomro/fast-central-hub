@@ -14,9 +14,10 @@ const reviewFacultyRoute = require('./routes/reviewfaculties');
 const societyRoute = require('./routes/societies');
 const eventRoute = require('./routes/events');
 const projectRoute = require('./routes/projects');
+const announcementRoute = require('./routes/announcements');
 dotenv.config();
 
-mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+mongoose.connect(process.env.MONGOURL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('Connected to Backend (MongoDB)');
 }).catch((err) => {
     console.log(err);
@@ -34,7 +35,8 @@ app.use('/api/reviewfaculties', reviewFacultyRoute);
 app.use('/api/societies', societyRoute);
 app.use('/api/events', eventRoute);
 app.use('/api/projects', projectRoute);
+app.use('/api/announcements', announcementRoute);
 app.listen(8800, () => {
     console.log('Backend Server is Running : 8800');
-    }
+}
 );

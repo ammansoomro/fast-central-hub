@@ -15,6 +15,7 @@ import Navbar from '../components/navbar/TopBar';
 import Footer from '../components/footer/Footer';
 import Register from './User/Register/Register';
 import Project from './Project/ProjectPage/ProjectPage';
+import AnnouncementsList from './Announcement/AnnouncementList/Announcements';
 // Export all components
 export {
         CoursePage, 
@@ -34,4 +35,5 @@ export {
         Footer,
         Register,
         Project,
+        AnnouncementsList,
 };

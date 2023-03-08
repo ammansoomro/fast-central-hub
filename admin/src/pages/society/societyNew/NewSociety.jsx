@@ -102,7 +102,7 @@ export default function NewSociety() {
         </div>
         <div className="addSocietyItem">
           <label>Background</label>
-          <input type="file" id="background" name="background" onChange={(e) => setBackground(e.target.files[0])} />
+          <input type="file" id="background" name="background" onChange={(e) => setBackground(e.target.files[0])} multiple />
         </div>
         <div className="addSocietyItem">
           <label>Code</label>

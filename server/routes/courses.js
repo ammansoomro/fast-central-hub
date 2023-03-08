@@ -78,9 +78,9 @@ router.get('/', verify, async (req, res) => {
         let courses;
         if (query) {
             // Get 8 Random
-            courses = await Course.aggregate([{ $sample: { size: 6 } }]);
+            courses = await Course.aggregate([{ $sample: { size: 5 } }]);
         } else {
-            courses = await Course.find();
+            courses = await Course.find().sort({name: 1});;
         }
 
         res.status(200).json(courses);

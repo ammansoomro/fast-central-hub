@@ -78,7 +78,7 @@ router.get('/', verify, async (req, res) => {
     }
     else {
         try {
-            const societies = await Society.find();
+            const societies = await Society.find().sort({name: 1});
             res.status(200).json(societies);
         }
         catch (err) {

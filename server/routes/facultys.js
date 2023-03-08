@@ -89,7 +89,7 @@ router.get('/', verify, async (req, res) => {
                 { $sample: { size: 6 } },
             ]);
         } else {
-            faculties = await Faculty.find();
+            faculties = await Faculty.find().sort({name: 1});
         }
         res.status(200).json(faculties);
     } catch (err) {

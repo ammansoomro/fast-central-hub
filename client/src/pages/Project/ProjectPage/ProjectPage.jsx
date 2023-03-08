@@ -33,11 +33,25 @@ const ProjectPage = () => {
             transition={{ duration: 0.5 }}>
             <ProjectBanner>
                 <Image>
-                    {project.type === "Research" ? (
+                {
+                      /* if project.domain == "CS" and project.type == "Research" , else if , else if, else*/
+
+                      project.domain === "CS" && project.type === "Research" ? (
                         <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FResearch02.png?alt=media&token=ca1f48ab-848a-4fa3-9a0e-d1454a8df42a" alt={project.code} />
-                    ) : (
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
-                    )
+                      )
+                        : project.domain === "CS" && project.type === "Product" ? (
+                          <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
+                        )
+                          : project.domain === "EE" && project.type === "Research" ? (
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-03-08%20at%2010.58.25%20AM.png?alt=media&token=d49eb5ad-9521-48b6-b304-078c32113880" alt={project.code} />
+                          )
+                            : project.domain === "EE" && project.type === "Product" ? (
+                              <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-03-08%20at%2010.57.23%20AM.png?alt=media&token=ce26f893-0553-4f6f-a435-a17490a91af8" alt={project.code} />
+                            )
+                              :
+                              (
+                                <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
+                              )
                     }
                 </Image>
                 <Container>
@@ -63,11 +77,25 @@ const ProjectPage = () => {
                 </Container>
                 <Card>
                     <CardImage>
-                        {project.type === "Research" ? (
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-02-24%20at%204.29.32%20AM.png?alt=media&token=a47fea83-19b3-4195-99b4-e81c3396f37c" alt={project.code} />
-                        ) : (
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-02-24%20at%204.31.28%20AM.png?alt=media&token=b26f6a78-8184-4913-8bb7-78c1b8717cd6" alt={project.code} />
-                        )
+                        {
+                            /* if project.domain == "CS" and project.type == "Research" , else if , else if, else*/
+
+                            project.domain === "CS" && project.type === "Research" ? (
+                                <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FResearch02.png?alt=media&token=ca1f48ab-848a-4fa3-9a0e-d1454a8df42a" alt={project.code} />
+                            )
+                                : project.domain === "CS" && project.type === "Product" ? (
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
+                                )
+                                    : project.domain === "EE" && project.type === "Research" ? (
+                                        <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-03-08%20at%2010.58.25%20AM.png?alt=media&token=d49eb5ad-9521-48b6-b304-078c32113880" alt={project.code} />
+                                    )
+                                        : project.domain === "EE" && project.type === "Product" ? (
+                                            <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FScreenshot%202023-03-08%20at%2010.57.23%20AM.png?alt=media&token=ce26f893-0553-4f6f-a435-a17490a91af8" alt={project.code} />
+                                        )
+                                            :
+                                            (
+                                                <img src="https://firebasestorage.googleapis.com/v0/b/fastcentralhub.appspot.com/o/Project%2FProduct02.png?alt=media&token=16f63dc1-0ea5-4fef-bedd-876d9c5ede83" alt={project.code} />
+                                            )
                         }
                     </CardImage>
                 </Card>
