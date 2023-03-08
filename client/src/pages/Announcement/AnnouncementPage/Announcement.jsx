@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { FiDownload } from 'react-icons/fi';
+import { FiEye } from 'react-icons/fi';
 import { GetAnnouncement } from './Functions';
 import { Heading, MyDiv, MyTable, SelectMaterialType, Container } from './Style.jsx';
 const CourseTeacher = () => {
@@ -48,8 +48,7 @@ const CourseTeacher = () => {
                 <td>{announcement.subject} </td>
                 {/* Format announcement.data in a nice format */}
                 <td>{announcement.date}</td>
-                <td>{announcement.semester}</td>
-                <td><a href={announcement.file}><FiDownload /></a></td>
+                <td><a href={announcement.file}><FiEye /></a></td>
               </tr>
             ))}
           </tbody>
