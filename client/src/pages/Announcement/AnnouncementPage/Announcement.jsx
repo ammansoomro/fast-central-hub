@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { FiEye } from 'react-icons/fi';
-import { GetAnnouncement } from './Functions';
+import { GetAnnouncement, MyModal } from './Functions';
 import { Heading, MyDiv, MyTable, SelectMaterialType, Container } from './Style.jsx';
 const CourseTeacher = () => {
   const params = useParams();
   console.log(params)
   const [announcements, setAnnouncements] = useState([]);
   const [type, setType] = useState("All");
+  const [openAnnouncementId, setOpenAnnouncementId] = useState(null);
+
+  const handleOpen = (announcementId) => {
+    setOpenAnnouncementId(announcementId);
+  };
+  const handleClose = () => {
+    setOpenAnnouncementId(null);
+  };
+
 
   useEffect(() => {
     const PullData = async () => {
       await GetAnnouncement(params, setAnnouncements);
     };
     PullData();
-  }, [params.id,params]);
+  }, [params.id, params]);
 
   console.log(announcements)
   console.log(params.id)
+
+
 
   return (
     <div>
@@ -48,7 +59,10 @@ const CourseTeacher = () => {
                 <td>{announcement.subject} </td>
                 {/* Format announcement.data in a nice format */}
                 <td>{announcement.date}</td>
-                <td><a href={announcement.file}><FiEye /></a></td>
+                <td><a href={announcement.file}>
+                  <FiEye onClick={() => handleOpen(announcement._id)} />
+                </a></td>
+                {MyModal(openAnnouncementId, announcement, handleClose)}
               </tr>
             ))}
           </tbody>
@@ -60,5 +74,3 @@ const CourseTeacher = () => {
 }
 
 export default CourseTeacher;
-
-

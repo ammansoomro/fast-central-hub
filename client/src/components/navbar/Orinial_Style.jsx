@@ -46,7 +46,7 @@ top: 0;
   {
     .logo{
       h1{
-        /* display: none; */
+        display: none;
       }
       img{
         width: 30px;
@@ -83,34 +83,8 @@ export const Navlist = styled.ul`
   }
 
 
-  @media (max-width: 768px) {
-    li {
-      font-size: 0.7rem;
-      padding: 0.5rem;
-    }
-  }
-`;
-
-export const SmallMenu = styled.div`
-   display: none;
-
-  @media (max-width: 768px) {
-    display: flex;
-  align-items: center;
-  justify-content: center;  }
-`;
-
-export const LargeMenu = styled.div`
-display: flex;
-    align-items: center;
-    justify-content: center;  @media (max-width: 768px) {
-      display: none;
-
-  }
-`;
-
-export const NavButton = styled.button`
- border: 0;
+  button {
+  border: 0;
   background: #3991dd;
   align-items: center;
   cursor: pointer;
@@ -119,17 +93,24 @@ export const NavButton = styled.button`
   color: #f9f9f9;
   font-family: inherit;
   font-weight: 600;
-  width: 100%;
+  /* width: 100%; */
   height: 35px;
   font-size: 13px;
   text-align: center;
   transition: 0.6s all;
   display: flex;
   justify-content: space-between;
+  }
+  button:hover {
 
-  &:hover {
     transform: scale(1.05);
     background: #216ce7;
   }
-`;
 
+  @media (max-width: 768px) {
+    li {
+      font-size: 0.7rem;
+      padding: 0.5rem;
+    }
+  }
+`;

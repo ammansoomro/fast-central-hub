@@ -102,3 +102,19 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ModalStyle = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 400px;
+  max-width: 750px;
+  background-color: ${({ theme }) => theme.background.paper};
+  border: 2px solid #000;
+  box-shadow: 24px;
+  padding: ${({ theme }) => theme.spacing(4)}px;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+`;
