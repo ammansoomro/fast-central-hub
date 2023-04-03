@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./Assets/Page.css";
 import Rating from '@mui/material/Rating';
-import { Grid,DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton, CourseCard, CourseCardImage } from "./Style.jsx";
-import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating,DelReview, AddReview } from "./Functions.jsx";
+import { Grid, DeleteReview, AlreadyReviewed, Btn, Wrapper, CourseBanner, Image, Card, Container, CardImage, TabHeading, CourseDetails, TabButton, CourseCard, CourseCardImage } from "./Style.jsx";
+import { getTeachers, getCourse, getCourseReviews, getTeacherIds, getAlreadyReviewed, getCourseRating, DelReview, AddReview } from "./Functions.jsx";
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 
@@ -23,7 +23,7 @@ const Course = () => {
     const [hover, setHover] = useState(-1);
     const [course, setCourse] = useState({});
     const [TeacherIds, setTeacherIds] = useState([]);
-    const [courseDescription, setCourseDescription] = useState("");
+    const [courseDescription, setCourseDescription] = useState("No Description");
     const [courseReviews, setCourseReviews] = useState([]);
     const [review, setReview] = useState("");
     // const [vote, setVote] = useState("upvote");
@@ -51,14 +51,27 @@ const Course = () => {
             setTeachers(res);
 
             const res2 = await getCourse(params.id);
-            setCourse(res2);
-            setCourseDescription(res2.description);
+            if (res2 && res2.description) {
+                setCourse(res2);
+                setCourseDescription(res2.description);
+            } else if (res2 && !res2.description) {
+                setCourse(res2);
+                setCourseDescription("No description found for this course");
+            } else {
+                console.error("Error: Course not found");
+            }
+
 
             const res5 = await getCourseReviews(params.id);
             setCourseReviews(res5);
 
-            const res6 = await getTeacherIds(params.id);
-            setTeacherIds([...new Set(res6.map((item) => item.teacher_id))]);
+            try {
+                const res6 = await getTeacherIds(params.id);
+                setTeacherIds([...new Set(res6.map((item) => item.teacher_id))]);
+            } catch (err) {
+                console.error("Error getting teacher ids:", err);
+            }
+
 
             const res7 = await getAlreadyReviewed(params.id);
             setAlreadyReviewed(res7);

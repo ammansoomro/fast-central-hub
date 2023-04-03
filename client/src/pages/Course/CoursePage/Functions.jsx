@@ -104,7 +104,8 @@ export const getTeacherIds = async (id) => {
         return teacherIds;
     }
     catch (err) {
-        console.log(err);
+        console.error(err);
+        throw new Error("Failed to get teacher IDs");
     }
 }
 
