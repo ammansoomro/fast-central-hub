@@ -46,7 +46,7 @@ export default function NewDepartment() {
         // Go to the next item without returning
       }
       else {
-      const FileName = Date.now() + item.label + item.file.name;
+      const FileName = Date.now() + item.label + (item.file ? item.file.name : "");
       const uploadTask = storage.ref(`/Departments/${FileName}`).put(item.file);
       uploadTask.on(
         "state_changed",

@@ -44,8 +44,8 @@ export default function NewSociety() {
         // Go to the next item without returning
       }
       else {
-      const FileName = Date.now() + item.label + item.file.name;
-      const uploadTask = storage.ref(`/Societys/${FileName}`).put(item.file);
+        const FileName = Date.now() + item.label + (item.file ? item.file.name : "");
+        const uploadTask = storage.ref(`/Societys/${FileName}`).put(item.file);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
