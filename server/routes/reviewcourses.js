@@ -117,7 +117,6 @@ router.get('/downvote/:course_id', verify, async (req, res) => {
 
 // ==================== GET RATING ====================
 router.get('/rating/:course_id', verify, async (req, res) => {
-    // Get All courses then sum the ratings of a course then divide by the number of ratings
     try {
         const reviewCourses = await ReviewCourse.find({course_id: req.params.course_id});
         let ratingSum = 0;
@@ -125,13 +124,13 @@ router.get('/rating/:course_id', verify, async (req, res) => {
             ratingSum += reviewCourse.rating;
         });
         const rating = ratingSum / reviewCourses.length;
-        res.status(200).json(rating);
+        res.status(200).json(rating.toFixed(2));
     }
     catch (err) {
         res.status(500).json(err);
     }
-}
-);
+});
+
 
 module.exports = router;
 
