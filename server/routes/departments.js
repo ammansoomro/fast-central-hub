@@ -1,13 +1,5 @@
 const router = require('express').Router();
 const Department = require('../Models/Department');
-
-// 1. CREATE
-// 2. UPDATE
-// 3. DELETE
-// 4. GET
-// 5. GET ALL
-
-
 // ==================== CREATE ====================
 router.post('/', async (req, res) => {
     // IF Department Already Exists in DB then return Error else Save Department

@@ -2,11 +2,6 @@ const router = require('express').Router();
 const verify = require('./verifyToken');
 const Event = require('../Models/Event');
 const Society = require('../Models/Society');
-// 1. CREATE
-// 2. UPDATE
-// 3. DELETE
-// 4. GET
-// 5. GET ALL
 
 // ==================== CREATE ====================
 router.post('/', verify, async (req, res) => {

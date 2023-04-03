@@ -4,17 +4,6 @@ const verify = require('./verifyToken');
 const Review = require('../Models/ReviewFaculty');
 const Material = require('../Models/Material');
 const Course = require('../Models/Course');
-// 1. CREATE
-// 2. UPDATE
-// 3. DELETE
-// 4. GET
-// 5. GET ALL
-// 6. GET RANDOM
-// 7. SEARCH
-// 8. PAGINATION
-// 9. COUNT
-// 10 COUNT BY DEPARTMENT
-// 11. PAGINATION BY DEPARTMENT
 
 // ==================== CREATE ====================
 router.post('/', verify, async (req, res) => {

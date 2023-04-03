@@ -4,16 +4,6 @@ const verify = require('./verifyToken');
 const Review = require('../Models/ReviewCourse');
 const Material = require('../Models/Material');
 const Faculty = require('../Models/Faculty');
-// 1. CREATE
-// 2. UPDATE
-// 3. DELETE Along with all the reviews associated with it
-// 4. GET
-// 5. GET ALL
-// 6. SEARCH
-// 7. GET BY DEPARTMENT
-// 8. GET UNIQUE CODES
-// 9. GET UPVOTES AND DOWNVOTES COUNT
-
 
 
 // ==================== CREATE ====================
