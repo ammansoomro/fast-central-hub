@@ -186,8 +186,11 @@ router.get('/rating', verify, async (req, res) => {
             }
         }
         for (let i = 0; i < coursesratingavg.length; i++) {
-            coursesratingavg[i].rating /= reviews.filter(review => review.course_id === coursesratingavg[i].course_id).length;
-        }
+            const reviewCount = reviews.filter(review => review.course_id === coursesratingavg[i].course_id).length;
+            coursesratingavg[i].rating /= reviewCount;
+            coursesratingavg[i].rating = parseFloat(coursesratingavg[i].rating.toFixed(2));
+          }
+          
         res.status(200).json(coursesratingavg);
     } catch (err) {
         res.status(500).json(err);
