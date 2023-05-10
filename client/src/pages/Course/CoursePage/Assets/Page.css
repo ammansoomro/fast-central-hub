@@ -96,14 +96,14 @@
 }
 
 .post .post-top .post-info .postRating img {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     margin: 0px 8px;
 
     /* Make Mobile Responsive */
     @media (max-width: 768px) {
-        width: 8px;
-        height: 8px;
+        width: 15px;
+        height: 15px;
         margin: 0px 5px;
     }
 }

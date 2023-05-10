@@ -1,7 +1,6 @@
-import React from 'react'
 import "./TeacherCard.scss"
 import { Link } from 'react-router-dom'
-const listitem = ({ imageUrl, name, email, department, about, courses, reviews, upvotes, downvotes,id }) => {
+const listitem = ({ imageUrl, name, email, department,id }) => {
   return (
     <div className="Wrapper">
       <div className="Card">
@@ -24,20 +23,10 @@ const listitem = ({ imageUrl, name, email, department, about, courses, reviews, 
               <span>{department}</span>
               <strong>{name}</strong>
             </div>
-            {/* <div className="rating">
-              {upvotes}
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                alt="upvote Logo"
-              />
-              {downvotes}
-              <img src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png" alt="downvote Logo" />
-            </div> */}
           </div>
         </div>
       </div>
     </div>
   )
 }
-
 export default listitem

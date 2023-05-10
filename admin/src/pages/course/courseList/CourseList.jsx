@@ -48,7 +48,7 @@ export default function ProductList() {
     {
       field: "course",
       headerName: "Course",
-      width: 340,
+      width: 365,
       renderCell: (params) => {
         return (
           <div className="courseListItem">
@@ -58,13 +58,12 @@ export default function ProductList() {
         );
       },
     },
-    { field: "core_elective", headerName: "Core/Elective", width: 180 },
-    { field: "credithours", headerName: "Credit Hours", width: 190 },
-    { field: "downvote", headerName: "Downvotes", width: 110 },
+    { field: "core_elective", headerName: "Core/Elective", width: 200 },
+    { field: "credithours", headerName: "Credit Hours", width: 215 },
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 170,
       renderCell: (params) => {
         return (
           <>

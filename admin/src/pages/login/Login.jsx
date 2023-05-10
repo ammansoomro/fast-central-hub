@@ -1,15 +1,13 @@
+import { RiLockPasswordLine } from "react-icons/ri";
+import { AiOutlineUser } from "react-icons/ai";
+import { IoIosArrowForward } from "react-icons/io";
+import styled from "styled-components";
 import React, { useContext, useState } from "react";
 import { loginCall } from "../../context/authContext/apiCalls";
 import { AuthContext } from "../../context/authContext/AuthContext";
-import wave from "./wave.png";
-import login from "./login_logo.svg";
-import avatar from "./login_avatar.svg";
-import { HiOutlineMail } from 'react-icons/hi'
-import { RiLockPasswordLine } from "react-icons/ri";
-import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,70 +25,47 @@ const Login = () => {
       });
       return;
     }
-
-    // Login Call, and if credentials are not correct, return a swal alert
     loginCall({ username, password }, dispatch);
   };
 
   return (
     <>
-      <GlobalStyle />
-      <Wave src={wave} alt="Wave" />
-      <Container>
-        <Image >
-          <img src={login} alt="login" />
-        </Image>
-        <LoginContent>
-          <Form >
-            <img className="avatar" src={avatar} alt="avatar" />
-            <div className="input-div">
-              <Myinput>
-                <Icon className="i">
-                  <HiOutlineMail />
-                </Icon>
-                <Wrapper>
-                  <Input
-                    type="text"
-                    placeholder="Username"
-                    className="loginInput"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                  <Validation>* Email Invalid</Validation>
-                </Wrapper>
-              </Myinput>
-              <Myinput>
-                <Icon className="i">
-                  <RiLockPasswordLine />
-                </Icon>
-                <Wrapper>
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    className="loginInput"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Wrapper>
-              </Myinput>
-
-              <Btn
-                className="loginButton"
-                onClick={handleLogin}
-                disabled={isFetching}
-              >
-                Login
-              </Btn>
-              <Link to="/register" style={{ textDecoration: 'none' }}>
-                <Btn
-                  className="loginButton"
-                >
-                  Register
-                </Btn>
-              </Link>
-            </div>
-
-          </Form>
-        </LoginContent>
-      </Container>
+      <SignIn>
+        <h2>Sign In</h2>
+        <h3>It's quick & simple</h3>
+        <Form
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}>
+          <Textbox >
+            <Input type="text" onChange={(e) => setUsername(e.target.value)} required />
+            <label>Username</label>
+            <span class="material-symbols-outlined">
+              <AiOutlineUser />
+            </span>
+          </Textbox>
+          <Textbox >
+            <Input type="password" onChange={(e) => setPassword(e.target.value)} required />
+            <label>Password</label>
+            <span class="material-symbols-outlined">
+              <RiLockPasswordLine />
+            </span>
+          </Textbox>
+          <Link to="/register">
+            <p>
+              Not a User?
+            </p>
+          </Link>
+          <Btn
+            onClick={handleLogin}
+          >Login
+            <span class="material-symbols-outlined">
+              <IoIosArrowForward />
+            </span>
+          </Btn>
+        </Form>
+      </SignIn>
     </>
   );
 };
@@ -99,202 +74,133 @@ export default Login;
 
 
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: #0a4e33ed;
-  }
+const Input = styled.input`
+border: 0;
+width: 100%;
+height: 60px;
+background: transparent;
+font-family: inherit;
+font-size: 16px;
+outline: none;
+
+&:focus ~ label{
+  color: #216ce7;
+}
+
+&:focus {
+  border-color: #216ce7;
+}
+
+/* :is(input:focus, input:valid) ~ label  */
+&:focus ~ label,
+&:valid ~ label {
+  translate: -40px -40px;
+scale: 0.875;
+}
+
+&:focus ~ span,
+&:valid ~ span {
+  color: rgb(255 255 255 / 96%);
+}
 `;
 
-const Validation = styled.div`
-  /* Style One */
-  position: absolute;
-  top: 50%;
-  right: 0.5rem;
-  transform: translate(5rem, -50%);
-  opacity: 0;
-  color: #f9f9f9;
-  transition: all 0.35ms;
-  font-size: 0.6rem;
+const SignIn = styled(motion.div)`
+position: fixed;
+z-index: 2;
+height: 100%;
+width: 100%;
+max-width: 100%;
+padding: 200px 90px;
+background: #111820;
+text-align: center;
+h2 {
+  font-size: 32px;
+font-weight: 600;
+margin: 0 0 6px;
+color: rgb(255 255 255 / 96%);
+}
+
+h3 {
+  font-size: 16px;
+font-weight: 400;
+margin: 0 0 30px;
+color: rgb(255 255 255 / 40%);
+}
+
+p {
+color: #3991dd;
+text-decoration: none;
+margin: 0 0 22px;
+
+}
+
 `;
 
-const Wrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-`;
-const Wave = styled.img`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  z-index: -1;
-
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-`;
-
-const Myinput = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  position: relative;
-  height: 45px;
-  margin: 50px 0;
+const Form = styled(motion.form)`
+margin: 0;
+display: grid;
+gap: 16px;
+/* If Laptop or desktop screen add padding */
+@media (min-width: 768px) {
+padding: 0 390px;
+}
 `;
 
 const Btn = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-  width: 100%;
-  height: 3rem;
-  border-radius: 2rem;
-  background: #2fd09b;
-  font-size: 1.2rem;
-  color: #fff;
-  font-family: "Poppins", sans-serif;
-  text-transform: uppercase;
-  margin: 2rem 0;
-  cursor: pointer;
-  transition: ease-in-out 0.5s;
-  font-weight: bold;
-  border: none;
+border: 0;
+background: #3991dd;
+align-items: center;
+cursor: pointer;
+padding: 0 24px;
+border-radius: 6px;
+color: #f9f9f9;
+font-family: inherit;
+font-weight: 600;
+width: 100%;
+height: 50px;
+font-size: 16px;
+text-align: center;
+transition: 0.6s all;
+display: flex;
+justify-content: space-between;
+/* Hover */
+&:hover {
+  /* Make the button a little bigger */
+  transform: scale(1.05);
+  /* Make the button a little darker */
+  background: #216ce7;
+}
 
-  &:hover {
-    border: 3px solid #38d39f;
-    color: #38d39f;
-    background: transparent;
-    transform: translateY(-0.8rem);
-  }
 `;
 
-const Input = styled.input`
-  transition: ease-in-out 0.3s;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  padding: 0.5rem 0.7rem;
-  font-size: 1.2rem;
-  color: ghostwhite;
-  font-family: "poppins", sans-serif;
-  border-bottom: 2px solid #26d69b80;
-  
+const Textbox = styled.div`
+position: relative;
+margin-bottom: 16px;
 
-  &:valid {
-    border-color: #55d688;}
+span{
+  position: absolute;
+top: 50%;
+translate: 0 -50%;
+left: 0;
+font-size: 22px;
+pointer-events: none;
+color: rgb(255 255 255 / 40%);
+}
 
-  &:invalid {
-    border-color: #fd4444;}
-  
-  &:invalid ~ ${Validation} {
-    opacity: 1;
-    transform: translate(0, -50%);}
-  /* Focus */
-  &:focus {
-    transition: 0.5s;
-    border-bottom: 2px solid #24d59afa;
-  }
+input {
+padding: 0 24px 0 36px;
+border-bottom: 2px solid #2b3442;
+color: rgb(255 255 255 / 96%);
+height: 72px;
+}
 
-  /* Input Focus Placeholder */
-  &:focus::placeholder {
-    color: transparent;
-  }
-
-  &::placeholder {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fafafa;
-    font-size: 18px;
-    transition: 0.3s;
-  }
-`;
-
-
-const Container = styled.div`
-  /* width: 100vw; */
-  height: 92vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 15rem;
-  padding: 0 2rem;
-  @media screen and (max-width: 1050px) {
-    grid-gap: 5rem;
-  }
-
-  @media screen and (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Image = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  img {
-    width: 480px;
-	/* width: 500px; */
-  }
-
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-
-  @media screen and (max-width: 1000px) {
-    img {
-      width: 400px;
-    }
-  }
-`;
-
-const LoginContent = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 2rem;
-  /* padding: 5rem; */
-  img {
-    height: 120px;
-  }
-
-  h2 {
-    margin: 15px 0;
-    color: #333;
-    text-transform: uppercase;
-    font-size: 2.9rem;
-  }
-
-  @media screen and (max-width: 900px) {
-    justify-content: center;
-  }
-
-  @media screen and (max-width: 1000px) {
-    h2 {
-      font-size: 2.4rem;
-      margin: 8px 0;
-    }
-  }
-`;
-
-const Form = styled.form`
-  width: 360px;
-  @media screen and (max-width: 1000px) {
-    width: 290px;
-  }
-`;
-
-const Icon = styled.div`
-  color: #79847d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+label{
+  position: absolute;
+top: 50%;
+left: 36px;
+translate: 0 -50%;
+color: rgb(255 255 255 / 40%);
+pointer-events: none;
+transition: 0.4s;
+}
 `;

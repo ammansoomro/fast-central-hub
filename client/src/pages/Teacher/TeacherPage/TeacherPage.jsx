@@ -221,22 +221,23 @@ const TeacherPage = () => {
                                     <>
                                         <div class="post review">
                                             <div class="post-top">
-                                                <div class="dp">
-                                                    {/* If review.upvote = 1 then this picture else that picture */}
-                                                    {review.upvote === 1 ? (
-                                                        <img
-                                                            src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
-                                                            alt="upvote Logo"
-                                                        />
-                                                    ) : (
-                                                        <img
-                                                            src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png"
-                                                            alt="downvote Logo"
-                                                        />
-                                                    )}
-                                                </div>
                                                 <div class="post-info">
-                                                    <p class="name">Amman</p>
+                                                    <div className="postRating">
+
+                                                        <p class="name">
+                                                        </p>
+                                                        {review.upvote === 1 ? (
+                                                            <img
+                                                                src="https://cdn-icons-png.flaticon.com/512/6520/6520157.png"
+                                                                alt="upvote Logo"
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src="https://cdn-icons-png.flaticon.com/512/6520/6520152.png"
+                                                                alt="downvote Logo"
+                                                            />
+                                                        )}
+                                                    </div>
                                                     <span class="time">
                                                         {new Date(review.createdAt).toDateString()}
                                                     </span>
@@ -272,7 +273,3 @@ const TeacherPage = () => {
 }
 
 export default TeacherPage;
-
-
-
-

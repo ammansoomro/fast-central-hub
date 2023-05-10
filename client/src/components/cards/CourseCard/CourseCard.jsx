@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import "./CourseCard.scss"
 const listitem = ({ coursecode, imageUrl, name, core_elective,id }) => {

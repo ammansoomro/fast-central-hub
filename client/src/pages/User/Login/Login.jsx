@@ -1,5 +1,4 @@
 // IMPORTS ===================================
-import React from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
@@ -9,6 +8,8 @@ import { loginCall } from '../../../authContext/apiCalls';
 import { AuthContext } from '../../../authContext/AuthContext';
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import swal from 'sweetalert';
+
 // IMPORT END ===================================
 const LoginCopy = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,17 @@ const LoginCopy = () => {
   const { dispatch } = useContext(AuthContext);
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (username === "" || password === "") {
+      swal({
+        title: "Error",
+        text: "Please fill in all fields",
+        icon: "error",
+        button: false,
+        timer: 2000
+
+      });
+      return;
+    }
     loginCall({ username, password }, dispatch);
   };
   return (

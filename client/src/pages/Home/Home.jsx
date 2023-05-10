@@ -20,9 +20,9 @@ const Home = () => {
       }
       <Heading />
       <TeacherList />
-      <CourseList />
       <SocietyList />
       <DepartmentList />
+      <CourseList />
     </motion.div>
   )
 }

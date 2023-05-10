@@ -10,14 +10,6 @@ const ReviewCourseSchema = new mongoose.Schema({
     review: {
         type: String,
     },
-    upvote: {
-        type: Number,
-        default: 0
-    },
-    downvote: {
-        type: Number,
-        default:   0
-    },
     rating: {
         type: Number,
         default: 0
